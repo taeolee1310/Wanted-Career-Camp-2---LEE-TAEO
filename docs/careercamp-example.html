@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>커리어 캠프 데이터 불러오기 예시</title>
+</head>
+<body>
+  <h1 id="name"></h1>
+  <p id="period"></p>
+  <ul id="benefits"></ul>
+
+  <script>
+    // careercamp.json을 같은 폴더에 두고, 로컬 서버(예: npx serve)로 열어야 fetch가 동작해요.
+    fetch('careercamp.json')
+      .then(r => r.json())
+      .then(d => {
+        document.getElementById('name').textContent = d.summary.name;
+        document.getElementById('period').textContent = d.program.period + ' · ' + d.program.location;
+        document.getElementById('benefits').innerHTML =
+          d.benefits.map(b => `<li><b>${b.title}</b>: ${b.highlight}</li>`).join('');
+      });
+  </script>
+</body>
+</html>
