@@ -9,6 +9,21 @@
     header.classList.toggle('is-scrolled', window.scrollY > 10);
   }, { passive: true });
 
+  /* 다크·라이트 토글 */
+  var themeBtn = document.getElementById('themeBtn');
+  function syncTheme() {
+    var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    themeBtn.setAttribute('aria-pressed', dark);
+    themeBtn.setAttribute('aria-label', dark ? '라이트 모드로 전환' : '다크 모드로 전환');
+  }
+  themeBtn.addEventListener('click', function () {
+    var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    syncTheme();
+  });
+  syncTheme();
+
   menuBtn.addEventListener('click', function () {
     var open = nav.classList.toggle('is-open');
     menuBtn.setAttribute('aria-expanded', open);
