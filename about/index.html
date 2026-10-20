@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>캠프소개 | 런웨이 AI 커리어 캠프 2기</title>
-  <meta name="description" content="런웨이 AI 커리어 캠프 2기 소개: 과정, 혜택, 강사·멘토, 참가 자격, 신청 방법, FAQ">
+  <title>캠프소개 | AI 네이티브 커리어 캠프 2기</title>
+  <meta name="description" content="AI 네이티브 커리어 캠프 2기 소개: 과정, 혜택, 강사·멘토, 참가 자격, 신청 방법, FAQ">
   <link rel="stylesheet" href="css/about.css">
   <!-- 화면 값의 원천: docs/company.md → content/data.js -->
   <script src="../content/data.js" defer></script>
@@ -20,7 +20,7 @@
       <ul class="gnav__links" id="gnav-links">
         <li><a href="../index.html">메인화면</a></li>
         <li><a href="index.html" aria-current="page">캠프소개</a></li>
-        <li><a href="../schedule.html">일정표</a></li>
+        <li><a href="../dayoff/index.html">일정표</a></li>
         <li><a href="../location/index.html">오시는 길</a></li>
       </ul>
     </nav>
@@ -31,14 +31,13 @@
     <section class="tile tile--light tile--center" id="camp" aria-labelledby="camp-heading">
       <div class="container">
         <p class="eyebrow" data-bind="camp-title"></p>
-        <h1 id="camp-heading" data-bind="positioning"></h1>
-        <p class="lead-airy" data-bind="definition"></p>
+        <h1 id="camp-heading" data-bind="definition"></h1>
+        <p class="lead-airy" data-bind="tagline"></p>
         <div class="actions actions--center">
           <a class="btn" href="#apply" data-bind="apply-label"></a>
           <a class="btn btn--ghost" href="#faq">자주 묻는 질문</a>
         </div>
         <p class="status" id="recruit-status" role="status"></p>
-        <p class="partner">협력 기관 · <span data-bind="partner"></span></p>
       </div>
     </section>
 
@@ -50,9 +49,8 @@
           <h2 id="overview-heading"><span data-bind="total-weeks"></span>, 결과물이 남는 풀타임 과정</h2>
           <p class="section-lead" data-bind="period"></p>
         </header>
-        <div class="grid grid--4" id="overview-list"></div>
         <ol class="phase-strip" id="phase-list" aria-label="단계별 로드맵 요약"></ol>
-        <p class="more"><a href="../schedule.html">주차별 로드맵과 주간 시간표 보기 ›</a></p>
+        <p class="more"><a href="../dayoff/index.html">주차별 로드맵 보기 ›</a></p>
       </div>
     </section>
 
@@ -94,7 +92,7 @@
       <div class="container container--wide">
         <header class="section-head section-head--center">
           <p class="eyebrow">운영 실적</p>
-          <h2 id="stats-heading">1기가 먼저 달렸습니다</h2>
+          <h2 id="stats-heading">숫자로 보는 운영 실적</h2>
           <p class="section-lead" data-bind="stats-asof"></p>
         </header>
         <dl class="stats" id="stat-list"></dl>
