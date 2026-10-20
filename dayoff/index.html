@@ -3,17 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>일정표 · 온결 AI 실전 커리어 캠프 1기</title>
-  <meta name="description" content="모집부터 수료까지, 온결 AI 실전 커리어 캠프 1기의 모든 날짜를 한눈에 확인하세요. (수업용 가상 페이지)">
+  <title>일정표 · 휴강일</title>
+  <meta name="description" content="커리어 캠프 교육 기간의 단계별 로드맵, 주간 시간표, 오프라인 일정, 휴강일 안내">
   <link rel="stylesheet" href="css/dayoff.css">
+  <script src="../content/data.js" defer></script>
+  <script src="js/dayoff.js" defer></script>
 </head>
 <body>
 
   <!-- 페이지 이동: 메인화면 → 캠프소개 → 일정표 → 오시는 길 -->
   <header class="global-nav">
     <div class="container">
-      <a class="global-nav__brand" href="../index.html">온결 커리어랩</a>
-      <nav aria-label="페이지 이동">
+      <a class="global-nav__brand" href="../index.html" data-text="company.name"></a>
+      <nav aria-label="주요 메뉴">
         <ul class="global-nav__links">
           <li><a href="../index.html">메인화면</a></li>
           <li><a href="../about.html">캠프소개</a></li>
@@ -26,207 +28,72 @@
 
   <div class="sub-nav">
     <div class="container">
-      <span class="sub-nav__title">일정표</span>
-      <div class="sub-nav__right">
-        <span class="status" data-recruit-status>모집 일정 확인 중</span>
-        <a class="btn-primary btn-primary--sm" href="#">신청하기</a>
-      </div>
+      <span class="sub-nav__title">휴강일</span>
+      <nav class="sub-nav__links" aria-label="이 페이지 안 이동">
+        <a href="#roadmap">로드맵</a>
+        <a href="#weekly">시간표</a>
+        <a href="#offline">오프라인</a>
+        <a href="#dayoff">휴강일</a>
+      </nav>
     </div>
   </div>
 
   <main>
 
     <!-- 히어로 -->
-    <section class="tile hero" id="schedule-hero" aria-labelledby="hero-title">
+    <section class="tile hero" aria-labelledby="hero-title">
       <div class="container">
-        <h1 class="hero__title" id="hero-title">8주, 날짜만 알면<br>준비는 시작돼요.</h1>
-        <p class="hero__lead">모집부터 수료까지 모든 일정을 한 페이지에 모았어요.</p>
-        <dl class="hero__facts">
-          <div><dt>모집 마감</dt><dd>26.11.13(금) 23:59</dd></div>
-          <div><dt>교육 기간</dt><dd>26.11.30(월) ~ 27.01.22(금) · 8주</dd></div>
-          <div><dt>정원</dt><dd>40명</dd></div>
-        </dl>
-        <div class="hero__cta">
-          <span class="status" data-recruit-status>모집 일정 확인 중</span>
-        </div>
+        <p class="tile__eyebrow" data-text="campTitle"></p>
+        <h1 class="hero__title" id="hero-title">수업하는 날과<br>쉬는 날</h1>
+        <p class="hero__lead">교육 기간의 주간 일정과 휴강일을 한 페이지에 모았어요.</p>
+        <dl class="hero__facts" id="hero-facts"></dl>
       </div>
     </section>
 
-    <!-- 1. 모집 일정 타임라인 (company.md 5. 일정표) -->
-    <section class="tile tile--parchment" id="recruit" aria-labelledby="recruit-title">
-      <div class="container">
-        <div class="tile__head">
-          <p class="tile__eyebrow">모집 일정</p>
-          <h2 class="tile__title" id="recruit-title">지원부터 개강까지</h2>
-          <p class="tile__lead">모든 시각은 한국 시간(KST) 기준이에요.</p>
-        </div>
-        <ol class="timeline">
-          <li class="timeline__item" id="date-open" data-start="2026-10-26T00:00:00+09:00" data-end="2026-11-13T23:59:59+09:00">
-            <p class="timeline__label">모집 시작</p>
-            <p class="timeline__date"><time datetime="2026-10-26">26.10.26(월)</time></p>
-            <p class="timeline__note">온라인 지원서 접수를 시작해요.</p>
-          </li>
-          <li class="timeline__item" id="date-close" data-start="2026-11-13T00:00:00+09:00" data-end="2026-11-13T23:59:59+09:00">
-            <p class="timeline__label">모집 마감</p>
-            <p class="timeline__date"><time datetime="2026-11-13T23:59+09:00">26.11.13(금) 23:59</time></p>
-            <p class="timeline__note">마감 시각 이후에는 제출할 수 없어요.</p>
-          </li>
-          <li class="timeline__item" id="date-interview" data-start="2026-11-17T00:00:00+09:00" data-end="2026-11-19T23:59:59+09:00">
-            <p class="timeline__label">인터뷰</p>
-            <p class="timeline__date"><time datetime="2026-11-17">26.11.17(화)</time> ~ <time datetime="2026-11-19">26.11.19(목)</time></p>
-            <p class="timeline__note">온라인 화상 인터뷰, 1인 20분이에요.</p>
-          </li>
-          <li class="timeline__item" id="date-result" data-start="2026-11-23T00:00:00+09:00" data-end="2026-11-23T23:59:59+09:00">
-            <p class="timeline__label">합격 발표</p>
-            <p class="timeline__date"><time datetime="2026-11-23">26.11.23(월)</time></p>
-            <p class="timeline__note">문자와 이메일로 개별 안내해요.</p>
-          </li>
-          <li class="timeline__item" id="date-start" data-start="2026-11-30T00:00:00+09:00" data-end="2026-11-30T23:59:59+09:00">
-            <p class="timeline__label">개강</p>
-            <p class="timeline__date"><time datetime="2026-11-30">26.11.30(월)</time></p>
-            <p class="timeline__note">오프라인 오리엔테이션으로 시작해요.</p>
-          </li>
-          <li class="timeline__item" id="date-end" data-start="2027-01-22T00:00:00+09:00" data-end="2027-01-22T23:59:59+09:00">
-            <p class="timeline__label">수료</p>
-            <p class="timeline__date"><time datetime="2027-01-22">27.01.22(금)</time></p>
-            <p class="timeline__note">데모데이와 수료식을 함께 열어요.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- 2. 단계별 로드맵 (company.md 6. 커리큘럼·로드맵) -->
-    <section class="tile" id="roadmap" aria-labelledby="roadmap-title">
+    <!-- 1. 단계별 로드맵 (company.md 6) -->
+    <section class="tile tile--parchment" id="roadmap" aria-labelledby="roadmap-title">
       <div class="container">
         <div class="tile__head">
           <p class="tile__eyebrow">단계별 로드맵</p>
-          <h2 class="tile__title" id="roadmap-title">5단계, 총 8주</h2>
+          <h2 class="tile__title" id="roadmap-title"></h2>
           <p class="tile__lead">단계마다 손에 남는 산출물이 있어요.</p>
         </div>
-        <ol class="roadmap">
-          <li class="card" id="phase-01">
-            <p class="card__meta">1단계 · 1주차</p>
-            <h3 class="card__title">AI 도구 익히기</h3>
-            <p class="card__period">26.11.30(월) ~ 12.04(금)</p>
-            <p class="card__body">직군별로 자주 쓰는 AI 도구를 직접 써 보고, 내 작업 방식에 맞게 정리해요.</p>
-            <p class="card__output"><strong>산출물</strong>도구 사용 기록, 프롬프트 노트</p>
-          </li>
-          <li class="card" id="phase-02">
-            <p class="card__meta">2단계 · 2–3주차</p>
-            <h3 class="card__title">문제 정의와 기획</h3>
-            <p class="card__period">26.12.07(월) ~ 12.18(금)</p>
-            <p class="card__body">팀을 꾸려 풀 문제를 고르고, 사용자와 완료 조건을 정해요.</p>
-            <p class="card__output"><strong>산출물</strong>문제 정의서, 기획안, 중간 발표</p>
-          </li>
-          <li class="card" id="phase-03">
-            <p class="card__meta">3단계 · 4–5주차</p>
-            <h3 class="card__title">프로젝트 만들기</h3>
-            <p class="card__period">26.12.21(월) ~ 27.01.01(금)</p>
-            <p class="card__body">AI와 함께 실제로 동작하는 결과물을 만들어요. 공휴일 이틀은 쉬어요.</p>
-            <p class="card__output"><strong>산출물</strong>동작하는 프로토타입, 작업 로그</p>
-          </li>
-          <li class="card" id="phase-04">
-            <p class="card__meta">4단계 · 6–7주차</p>
-            <h3 class="card__title">검증과 포트폴리오</h3>
-            <p class="card__period">27.01.04(월) ~ 01.15(금)</p>
-            <p class="card__body">사용자 피드백으로 고치고, 과정을 포트폴리오로 정리해요.</p>
-            <p class="card__output"><strong>산출물</strong>개선 기록, 포트폴리오 초안</p>
-          </li>
-          <li class="card" id="phase-05">
-            <p class="card__meta">5단계 · 8주차</p>
-            <h3 class="card__title">데모데이와 지원 준비</h3>
-            <p class="card__period">27.01.18(월) ~ 01.22(금)</p>
-            <p class="card__body">결과를 발표하고, 멘토와 이력서·면접을 함께 준비해요.</p>
-            <p class="card__output"><strong>산출물</strong>발표 자료, 이력서, 모의 면접 기록</p>
-          </li>
-        </ol>
-        <p class="sum-check">주차 합계: 1 + 2 + 2 + 2 + 1 = 8주</p>
+        <ol class="roadmap" id="roadmap-list"></ol>
+        <p class="sum-check" id="roadmap-sum"></p>
       </div>
     </section>
 
-    <!-- 3. 주간 시간표 -->
+    <!-- 2. 주간 시간표 (company.md 6) -->
     <section class="tile tile--dark" id="weekly" aria-labelledby="weekly-title">
       <div class="container">
         <div class="tile__head">
           <p class="tile__eyebrow">주간 시간표</p>
-          <h2 class="tile__title" id="weekly-title">평일 10:00–17:00</h2>
+          <h2 class="tile__title" id="weekly-title"></h2>
           <p class="tile__lead">점심시간 12:00–13:00은 모든 요일 같아요.</p>
         </div>
-        <ul class="week">
-          <li class="week__day">
-            <p class="week__name">월</p>
-            <p class="week__slot"><span class="week__time">10:00–12:00</span>주간 목표 세우기</p>
-            <p class="week__slot"><span class="week__time">13:00–17:00</span>핵심 강의</p>
-            <span class="week__tag">온라인</span>
-          </li>
-          <li class="week__day">
-            <p class="week__name">화</p>
-            <p class="week__slot"><span class="week__time">10:00–12:00</span>실습 과제</p>
-            <p class="week__slot"><span class="week__time">13:00–17:00</span>팀 프로젝트</p>
-            <span class="week__tag">온라인</span>
-          </li>
-          <li class="week__day">
-            <p class="week__name">수</p>
-            <p class="week__slot"><span class="week__time">10:00–12:00</span>직군별 멘토링</p>
-            <p class="week__slot"><span class="week__time">13:00–17:00</span>팀 프로젝트</p>
-            <span class="week__tag">온라인</span>
-          </li>
-          <li class="week__day">
-            <p class="week__name">목</p>
-            <p class="week__slot"><span class="week__time">10:00–12:00</span>실습 과제</p>
-            <p class="week__slot"><span class="week__time">13:00–17:00</span>팀 프로젝트</p>
-            <span class="week__tag">온라인</span>
-          </li>
-          <li class="week__day">
-            <p class="week__name">금</p>
-            <p class="week__slot"><span class="week__time">10:00–12:00</span>공유 세션</p>
-            <p class="week__slot"><span class="week__time">13:00–17:00</span>주간 회고</p>
-            <span class="week__tag">온라인 · 오프라인 일정이 있는 날은 현장</span>
-          </li>
-        </ul>
-        <p class="tile__note">공휴일과 휴강일에는 수업이 없어요. 아래 휴강일을 확인해 주세요.</p>
+        <ul class="week" id="week-list"></ul>
+        <p class="tile__note">휴강일에는 수업이 없어요. 아래 휴강일을 확인해 주세요.</p>
       </div>
     </section>
 
-    <!-- 4. 오프라인 일정 · 휴강일 -->
+    <!-- 3. 오프라인 일정 · 휴강일 (company.md 5) -->
     <section class="tile" id="offline" aria-labelledby="offline-title">
       <div class="container">
         <div class="tile__head">
           <p class="tile__eyebrow">오프라인 일정 · 휴강일</p>
           <h2 class="tile__title" id="offline-title">만나는 날과 쉬는 날</h2>
+          <p class="tile__lead">모든 날짜는 한국 시간(KST) 기준이에요.</p>
         </div>
         <div class="split">
           <div>
             <h3 class="split__title">오프라인 일정</h3>
-            <ul class="rows">
-              <li id="offline-01">
-                <time datetime="2026-11-30T10:00+09:00">26.11.30(월) 10:00</time>
-                <span>오리엔테이션<small>팀 구성과 캠프 안내</small></span>
-              </li>
-              <li id="offline-02">
-                <time datetime="2026-12-18T14:00+09:00">26.12.18(금) 14:00</time>
-                <span>중간 발표<small>팀별 기획안 발표와 피드백</small></span>
-              </li>
-              <li id="offline-03">
-                <time datetime="2027-01-22T14:00+09:00">27.01.22(금) 14:00</time>
-                <span>데모데이 · 수료식<small>프로젝트 발표와 수료</small></span>
-              </li>
-            </ul>
+            <ul class="rows" id="offline-list"></ul>
             <p class="split__more"><a href="../location.html">장소와 오시는 길 보기 ›</a></p>
           </div>
-          <div>
+          <div id="dayoff">
             <h3 class="split__title">휴강일</h3>
-            <ul class="rows">
-              <li id="dayoff-01">
-                <time datetime="2026-12-25">26.12.25(금)</time>
-                <span>성탄절<small>공휴일 · 3단계 4주차</small></span>
-              </li>
-              <li id="dayoff-02">
-                <time datetime="2027-01-01">27.01.01(금)</time>
-                <span>새해 첫날<small>공휴일 · 3단계 5주차</small></span>
-              </li>
-            </ul>
-            <p class="split__more">휴강일에 빠진 수업은 녹화 강의로 대신해요.</p>
+            <ul class="rows" id="dayoff-list"></ul>
+            <p class="split__more" data-text="dayoff.note"></p>
           </div>
         </div>
       </div>
@@ -237,57 +104,23 @@
   <!-- 푸터 (전 페이지 공통): 회사 정보 → 가상 고지 → 문의처 -->
   <footer class="footer">
     <div class="container">
-      <p class="footer__notice">수업용 가상 회사입니다. 등장하는 회사·인물·수치·기관·주소·링크는 모두 지어낸 것입니다.</p>
+      <p class="footer__notice" data-text="notice"></p>
       <div class="footer__cols">
         <div>
           <h2>회사 정보</h2>
-          <p>온결 커리어랩 · 대표 한지온(가상)</p>
-          <p>가온시 새솔구 별빛로 12, 5층 (가상 주소)</p>
-          <p>hello@ongyeol.example · 000-0000-0000</p>
+          <p><span data-text="company.name"></span> · 대표 <span data-text="company.ceo"></span></p>
+          <p data-text="company.address"></p>
+          <p>설립 <span data-text="company.founded"></span></p>
         </div>
         <div>
           <h2>문의처</h2>
-          <p>캠프운영팀</p>
-          <p>camp@ongyeol.example · 000-0000-0001</p>
-          <p>평일 18시까지 답변해요.</p>
+          <p data-text="contact.dept"></p>
+          <p><span data-text="contact.email"></span> · <span data-text="contact.phone"></span></p>
+          <p>응답 시간 <span data-text="contact.hours"></span></p>
         </div>
       </div>
-      <p class="footer__legal">© 2026 온결 커리어랩 (가상)</p>
     </div>
   </footer>
 
-  <script>
-    // 일정표 날짜(data-start / data-end, KST)로 모집 상태와 타임라인 진행을 계산한다.
-    (function () {
-      var now = Date.now();
-      var DAY = 24 * 60 * 60 * 1000;
-      var open = new Date('2026-10-26T00:00:00+09:00').getTime();
-      var close = new Date('2026-11-13T23:59:59+09:00').getTime();
-
-      var label, state;
-      if (now < open) {
-        label = '모집 예정 · D-' + Math.ceil((open - now) / DAY);
-        state = 'soon';
-      } else if (now <= close) {
-        var left = Math.ceil((close - now) / DAY);
-        label = left <= 1 ? '모집 중 · 오늘 마감' : '모집 중 · 마감 D-' + (left - 1);
-        state = 'open';
-      } else {
-        label = '모집 마감';
-        state = 'closed';
-      }
-      document.querySelectorAll('[data-recruit-status]').forEach(function (el) {
-        el.textContent = label;
-        el.dataset.state = state;
-      });
-
-      document.querySelectorAll('.timeline__item').forEach(function (item) {
-        var start = new Date(item.dataset.start).getTime();
-        var end = new Date(item.dataset.end).getTime();
-        if (now > end) item.dataset.state = 'done';
-        else if (now >= start) item.dataset.state = 'now';
-      });
-    })();
-  </script>
 </body>
 </html>

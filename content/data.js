@@ -82,6 +82,17 @@ window.CAMP = {
     { id: 'date-end', label: '수료', start: '2027-03-26', mode: '오프라인' }
   ],
 
+  dayoff: {
+    note: '휴강일 수업은 녹화 강의로 대신합니다. 휴강일은 월 출석률 계산에서 뺍니다.',
+    items: [
+      { id: 'dayoff-01', label: '성탄절', date: '2026-12-25' },
+      { id: 'dayoff-02', label: '새해 첫날', date: '2027-01-01' },
+      { id: 'dayoff-03', label: '설날 연휴', date: '2027-02-05' },
+      { id: 'dayoff-04', label: '설날 대체공휴일', date: '2027-02-08' },
+      { id: 'dayoff-05', label: '삼일절', date: '2027-03-01' }
+    ]
+  },
+
   roadmap: [
     { id: 'phase-01', name: '온보딩·AI 기초', from: 1, to: 2, text: 'AI 도구 설치와 첫 대화, 직군별 업무 흐름 이해', output: '작업 환경, 프롬프트 노트' },
     { id: 'phase-02', name: '문제 정의', from: 3, to: 6, text: '직군별 실무 과제를 정하고 AI로 조사·분석', output: '문제 정의서, 리서치 요약' },

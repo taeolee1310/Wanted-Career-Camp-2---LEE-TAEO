@@ -149,54 +149,16 @@ button:focus-visible {
   letter-spacing: 0.231px;
 }
 
-.sub-nav__right {
+.sub-nav__links {
   display: flex;
-  align-items: center;
-  gap: var(--s-sm);
-}
-
-/* ---------- 버튼 ---------- */
-.btn-primary {
-  display: inline-block;
-  background: var(--primary);
-  color: var(--on-dark);
-  border-radius: var(--r-pill);
-  padding: 11px 22px;
-  font-size: 17px;
-  line-height: 1;
-  white-space: nowrap;
-}
-
-.btn-primary--sm {
-  padding: 8px 15px;
+  gap: var(--s-md);
   font-size: 14px;
   letter-spacing: -0.224px;
 }
 
-.btn-primary:active {
-  transform: scale(0.95);
-}
-
-/* ---------- 상태 배지 ---------- */
-.status {
-  display: inline-block;
-  padding: var(--s-xxs) var(--s-sm);
-  border-radius: var(--r-pill);
-  background: var(--canvas);
-  border: 1px solid var(--hairline);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: -0.224px;
-  white-space: nowrap;
-}
-
-.status[data-state="open"] {
-  border-color: var(--primary);
-  color: var(--primary);
-}
-
-.status[data-state="closed"] {
-  color: var(--ink-muted-48);
+.sub-nav__links a {
+  color: var(--ink);
+  padding: var(--s-sm) 0;
 }
 
 /* ---------- 섹션 타일 ---------- */
@@ -282,78 +244,6 @@ button:focus-visible {
 
 .hero__facts dd {
   font-weight: 600;
-}
-
-.hero__cta {
-  margin-top: var(--s-xl);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: var(--s-sm);
-}
-
-/* ---------- 모집 일정 타임라인 ---------- */
-.timeline {
-  position: relative;
-  display: grid;
-  gap: var(--s-lg);
-  padding-left: var(--s-xl);
-}
-
-.timeline::before {
-  content: "";
-  position: absolute;
-  left: 7px;
-  top: 6px;
-  bottom: 6px;
-  width: 2px;
-  background: var(--hairline);
-}
-
-.timeline__item {
-  position: relative;
-}
-
-.timeline__item::before {
-  content: "";
-  position: absolute;
-  left: calc(-1 * var(--s-xl));
-  top: 6px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--canvas);
-  border: 2px solid var(--hairline);
-}
-
-.timeline__item[data-state="done"]::before {
-  background: var(--ink-muted-48);
-  border-color: var(--ink-muted-48);
-}
-
-.timeline__item[data-state="now"]::before {
-  background: var(--primary);
-  border-color: var(--primary);
-}
-
-.timeline__label {
-  font-weight: 600;
-}
-
-.timeline__item[data-state="done"] .timeline__label,
-.timeline__item[data-state="done"] .timeline__date {
-  color: var(--ink-muted-48);
-}
-
-.timeline__date {
-  font-variant-numeric: tabular-nums;
-}
-
-.timeline__note {
-  font-size: 14px;
-  letter-spacing: -0.224px;
-  color: var(--ink-muted-80);
 }
 
 /* ---------- 로드맵 카드 ---------- */
@@ -447,14 +337,6 @@ button:focus-visible {
   font-variant-numeric: tabular-nums;
 }
 
-.week__tag {
-  display: inline-block;
-  margin-top: var(--s-sm);
-  font-size: 12px;
-  letter-spacing: -0.12px;
-  color: var(--primary-on-dark);
-}
-
 .tile--dark .tile__note {
   margin-top: var(--s-lg);
   font-size: 14px;
@@ -534,10 +416,6 @@ button:focus-visible {
   margin-bottom: var(--s-xs);
 }
 
-.footer__legal {
-  margin-top: var(--s-lg);
-  color: var(--ink-muted-48);
-}
 
 /* ---------- 반응형 (DESIGN-apple.md 기준점) ---------- */
 @media (max-width: 1068px) {
@@ -609,7 +487,11 @@ button:focus-visible {
     gap: var(--s-md);
   }
 
-  .sub-nav__right .status {
-    display: none;
+  .sub-nav__title {
+    font-size: 17px;
+  }
+
+  .sub-nav__links {
+    gap: var(--s-sm);
   }
 }
