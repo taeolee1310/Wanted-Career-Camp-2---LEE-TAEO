@@ -110,7 +110,7 @@ button:focus-visible {
 
 .global-nav__links {
   display: flex;
-  gap: var(--s-lg);
+  gap: 20px;
 }
 
 .global-nav__links a {

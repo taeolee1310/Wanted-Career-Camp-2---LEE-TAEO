@@ -69,8 +69,9 @@ a { color: var(--primary); }
 
 /* 글로벌 내비 */
 .gnav { background: var(--black); height: var(--touch); position: sticky; top: 0; z-index: 10; }
-.gnav__inner { max-width: var(--content-max); height: 100%; margin: 0 auto; padding: 0 var(--space-side); display: flex; align-items: center; }
-.gnav__links { list-style: none; margin: 0; padding: 0; display: flex; gap: 20px; width: 100%; justify-content: center; }
+.gnav__inner { max-width: var(--content-max); height: 100%; margin: 0 auto; padding: 0 var(--space-side); display: flex; align-items: center; justify-content: space-between; }
+.gnav__brand { color: var(--on-dark); text-decoration: none; font-size: var(--fs-nav); font-weight: 600; letter-spacing: var(--ls-nav); display: inline-flex; align-items: center; min-height: var(--touch); }
+.gnav__links { list-style: none; margin: 0; padding: 0; display: flex; gap: 20px; }
 .gnav__links a { color: var(--on-dark); text-decoration: none; font-size: var(--fs-nav); letter-spacing: var(--ls-nav); display: inline-flex; align-items: center; min-height: var(--touch); opacity: 0.8; }
 .gnav__links a[aria-current="page"], .gnav__links a:hover { opacity: 1; }
 .gnav__toggle { display: none; background: none; border: 0; color: var(--on-dark); font: inherit; font-size: var(--fs-nav); min-height: var(--touch); padding: 0 var(--space-xxs); cursor: pointer; }
@@ -114,7 +115,7 @@ a { color: var(--primary); }
   .gnav { height: auto; }
   .gnav__inner { flex-wrap: wrap; }
   .gnav__toggle { display: block; }
-  .gnav__links { display: none; flex-direction: column; gap: 0; padding-bottom: var(--space-xs); }
+  .gnav__links { display: none; width: 100%; flex-direction: column; gap: 0; padding-bottom: var(--space-xs); }
   .gnav__links.is-open { display: flex; }
 }
 @media (max-width: 640px) {
