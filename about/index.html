@@ -5,26 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>캠프소개 | AI 네이티브 커리어 캠프 2기</title>
   <meta name="description" content="AI 네이티브 커리어 캠프 2기 소개: 과정, 혜택, 강사·멘토, 참가 자격, 신청 방법, FAQ">
+  <script src="../js/theme.js"></script>
+  <link rel="stylesheet" href="../css/chrome.css">
   <link rel="stylesheet" href="css/about.css">
   <!-- 화면 값의 원천: docs/company.md → content/data.js -->
   <script src="../content/data.js" defer></script>
+  <script src="../js/chrome.js" defer></script>
   <script src="js/about.js" defer></script>
 </head>
-<body>
+<body data-page="about" data-root="../">
   <a class="skip" href="#main">본문으로 건너뛰기</a>
 
-  <header class="gnav">
-    <nav class="gnav__inner" aria-label="주요 메뉴">
-      <a class="gnav__brand" href="../index.html" data-bind="camp-title"></a>
-      <button class="gnav__toggle" type="button" aria-expanded="false" aria-controls="gnav-links">메뉴</button>
-      <ul class="gnav__links" id="gnav-links">
-        <li><a href="../index.html">메인화면</a></li>
-        <li><a href="index.html" aria-current="page">캠프소개</a></li>
-        <li><a href="../dayoff/index.html">일정표</a></li>
-        <li><a href="../location/index.html">오시는 길</a></li>
-      </ul>
-    </nav>
-  </header>
+  <header id="header"></header>
 
   <main id="main">
     <!-- 3. 캠프 개요: 캠프 정의 -->
@@ -147,22 +139,7 @@
     </section>
   </main>
 
-  <!-- 공통 푸터: 회사 정보 → 가상 고지 → 문의처 (company.md 2·1·11) -->
-  <footer class="footer">
-    <div class="container container--wide footer__grid">
-      <section aria-labelledby="footer-company">
-        <h2 class="footer__title" id="footer-company">회사 정보</h2>
-        <dl class="footer__info" id="footer-company-list"></dl>
-      </section>
-      <section aria-labelledby="footer-contact">
-        <h2 class="footer__title" id="footer-contact">문의처</h2>
-        <dl class="footer__info" id="footer-contact-list"></dl>
-      </section>
-    </div>
-    <div class="container container--wide">
-      <p class="footer__notice" data-bind="notice"></p>
-    </div>
-  </footer>
+  <footer id="footer"></footer>
 
   <noscript><p class="noscript">이 페이지는 JavaScript로 내용을 불러옵니다. 브라우저에서 JavaScript를 켜 주세요.</p></noscript>
 </body>

@@ -1,0 +1,89 @@
+/* 모든 페이지 공통: 상단 메뉴·푸터·다크 모드 색.
+   js/chrome.js가 그리는 #header, #footer만 건드린다(페이지마다 쓰는 CSS와 섞이지 않도록 id로 한정).
+   홈(css/style.css)과 서브 페이지(about, dayoff, location)가 모두 이 파일을 읽는다. */
+
+:root {
+  --ch-nav: #000000;
+  --ch-nav-text: #cccccc;
+  --ch-footer-bg: #f5f5f7;
+  --ch-footer-ink: #333333;
+  --ch-muted: #6e6e73;
+  --ch-hairline: #e0e0e0;
+  --ch-logo-dot: #2997ff;
+  --ch-font: "SF Pro Text", system-ui, -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", "Inter", sans-serif;
+  --ch-font-display: "SF Pro Display", system-ui, -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", "Inter", sans-serif;
+}
+
+/* 다크 모드: 서브 페이지가 쓰는 색 변수 이름까지 함께 바꾼다 (:root[...]가 각 페이지의 :root보다 우선) */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ch-footer-bg: #161617;
+  --ch-footer-ink: #d2d2d7;
+  --ch-muted: #98989d;
+  --ch-hairline: #38383a;
+  --canvas: #000000;
+  --parchment: #161617;
+  --pearl: #232325;
+  --ink: #f5f5f7;
+  --ink-muted-80: #d2d2d7;
+  --ink-muted-48: #98989d;
+  --ink-muted: #98989d;
+  --hairline: #38383a;
+  --divider-soft: #2a2a2c;
+  --primary: #0071e3;
+}
+
+/* 세로 스크롤바 유무 때문에 페이지마다 헤더 위치가 밀리지 않게 한다 */
+html { overflow-y: scroll; }
+body { transition: background-color .25s, color .25s; }
+
+/* ---------- 헤더 ---------- */
+#header { position: sticky; top: 0; z-index: 100; height: 44px; background: var(--ch-nav); color: #fff; font-family: var(--ch-font); font-size: 12px; line-height: 1.47; letter-spacing: -0.12px; }
+:root[data-theme="dark"] #header { border-bottom: 1px solid #2a2a2c; }
+#header .header__inner { display: flex; align-items: center; gap: 24px; height: 44px; width: min(932px, 100% - 48px); margin-inline: auto; padding: 0; max-width: none; }
+#header a { text-decoration: none; }
+#header .logo { display: inline-flex; align-items: center; font-family: var(--ch-font-display); font-weight: 600; font-size: 14px; letter-spacing: -0.2px; color: #fff; white-space: nowrap; }
+#header .logo span { color: var(--ch-logo-dot); }
+#header .nav { display: flex; gap: 20px; margin: 0 0 0 auto; padding: 0; background: none; }
+#header .nav a { display: block; min-height: 0; padding: 0; line-height: 44px; font-size: 12px; font-weight: 400; letter-spacing: -0.12px; color: var(--ch-nav-text); opacity: 1; white-space: nowrap; }
+#header .nav a:hover, #header .nav a[aria-current="page"] { color: #fff; }
+#header .header__tools { display: flex; align-items: center; gap: 4px; }
+/* 넓은 화면에선 테마 버튼을 본문 폭 밖으로 빼서, 메뉴 위치가 모든 페이지에서 같게 한다 */
+@media (min-width: 1100px) { #header .header__tools { position: absolute; top: 6px; right: 24px; } }
+#header .icon-btn { display: grid; place-items: center; width: 32px; height: 32px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: #fff; cursor: pointer; transition: background .15s, transform .12s; }
+#header .icon-btn:hover { background: rgba(255, 255, 255, 0.14); }
+#header .icon-btn:active { transform: scale(0.95); }
+#header .icon-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+#header .icon-btn .i-sun { display: none; }
+:root[data-theme="dark"] #header .icon-btn .i-sun { display: block; }
+:root[data-theme="dark"] #header .icon-btn .i-moon { display: none; }
+#header .menu-btn { display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px; }
+#header .menu-btn span { display: block; width: 16px; height: 1px; background: currentColor; }
+#header :focus-visible { outline: 2px solid #0071e3; outline-offset: 2px; }
+
+@media (max-width: 833px) {
+  #header .menu-btn { display: flex; }
+  #header .nav { position: absolute; top: 44px; left: 0; right: 0; margin: 0; flex-direction: column; gap: 0; background: var(--ch-nav); display: none; padding-bottom: 8px; }
+  #header .nav.is-open { display: flex; }
+  #header .nav a { padding: 0 24px; font-size: 14px; }
+  #header .header__tools { margin-left: auto; }
+}
+
+/* ---------- 푸터 ---------- */
+#footer { background: var(--ch-footer-bg); color: var(--ch-footer-ink); padding: 64px 0 32px; font-family: var(--ch-font); font-size: 12px; letter-spacing: -0.12px; line-height: 1.6; }
+#footer .container { width: min(980px, 100% - 48px); max-width: none; margin-inline: auto; padding: 0; }
+#footer .footer__grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 48px; border: 0; }
+#footer .logo { display: inline-block; margin: 0 0 8px; font-family: var(--ch-font-display); font-weight: 600; font-size: 17px; letter-spacing: -0.2px; color: var(--ink, #1d1d1f); }
+#footer .logo span { color: var(--primary, #0066cc); }
+#footer .defs { margin: 0; max-width: none; }
+#footer .defs div { display: grid; grid-template-columns: 72px 1fr; gap: 12px; padding: 4px 0; border: 0; }
+#footer .defs dt { font-size: 12px; font-weight: 600; color: var(--ch-footer-ink); padding: 0; }
+#footer .defs dd { margin: 0; }
+#footer .footer__notice { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--ch-hairline); color: var(--ch-muted); }
+
+@media (max-width: 833px) {
+  #footer .footer__grid { grid-template-columns: 1fr; gap: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body, #header .icon-btn { transition: none; }
+}

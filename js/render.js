@@ -49,13 +49,6 @@
   }
 
   /* ---------- 공통 조각 ---------- */
-  var PAGES = [
-    { key: 'home', href: 'index.html', label: '메인화면' },
-    { key: 'about', href: 'about/index.html', label: '캠프소개' },
-    { key: 'dayoff', href: 'dayoff/index.html', label: '일정표' },
-    { key: 'location', href: 'location/index.html', label: '오시는 길' }
-  ];
-
   function head(title) {
     return '<div class="section__head reveal"><h2 class="section__title">' + title + '</h2></div>';
   }
@@ -126,35 +119,6 @@
     return C.schedule.filter(function (x) { return x.mode.indexOf('오프라인') === 0; });
   }
 
-  /* ---------- 헤더·푸터 ---------- */
-  function renderHeader() {
-    var links = PAGES.map(function (p) {
-      return '<a href="' + p.href + '"' + (p.key === page ? ' aria-current="page"' : '') + '>' + p.label + '</a>';
-    }).join('');
-    var sun = '<svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
-    var moon = '<svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg>';
-    document.getElementById('header').innerHTML =
-      '<div class="header__inner">' +
-      '<a href="index.html" class="logo">' + C.company.name + '<span>.</span></a>' +
-      '<nav class="nav" id="nav" aria-label="주요 메뉴">' + links + '</nav>' +
-      '<div class="header__tools">' +
-      '<button type="button" class="icon-btn" id="themeBtn" aria-label="다크 모드 전환" aria-pressed="false">' + moon + sun + '</button>' +
-      '<button type="button" class="icon-btn menu-btn" id="menuBtn" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span><span></span></button>' +
-      '</div></div>';
-  }
-
-  function renderFooter() {
-    var c = C.company, k = C.contact;
-    document.getElementById('footer').innerHTML =
-      '<div class="container footer__grid">' +
-      '<div><p class="logo">' + c.name + '<span>.</span></p></div>' +
-      '<dl class="defs defs--small">' +
-      '<div><dt>문의</dt><dd>' + k.dept + '</dd></div>' +
-      '<div><dt>이메일</dt><dd>' + k.email + '</dd></div>' +
-      '</dl></div>' +
-      '<div class="container footer__notice">' + C.notice + '</div>';
-  }
-
   /* 16주 로드맵 비주얼: 단계 폭은 주차에 비례, 오프라인 일정은 날짜 위치에 표시 */
   function journey() {
     var st = S('date-start'), en = S('date-end');
@@ -212,11 +176,9 @@
   }
 
   /* ---------- 실행 ---------- */
-  renderHeader();
   document.getElementById('main').innerHTML = home();
   document.title = campTitle + ' | ' + C.company.name;
   var meta = document.querySelector('meta[name="description"]');
   if (meta) meta.content = C.camp.definition;
-  renderFooter();
   renderApplyDialog();
 })();

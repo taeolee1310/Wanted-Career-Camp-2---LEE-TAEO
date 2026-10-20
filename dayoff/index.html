@@ -5,26 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>일정표</title>
   <meta name="description" content="커리어 캠프 교육 기간의 단계별 로드맵과 오프라인 일정 안내">
+  <script src="../js/theme.js"></script>
+  <link rel="stylesheet" href="../css/chrome.css">
   <link rel="stylesheet" href="css/dayoff.css">
   <script src="../content/data.js" defer></script>
+  <script src="../js/chrome.js" defer></script>
   <script src="js/dayoff.js" defer></script>
 </head>
-<body>
+<body data-page="dayoff" data-root="../">
 
-  <!-- 페이지 이동: 메인화면 → 캠프소개 → 일정표 → 오시는 길 -->
-  <header class="global-nav">
-    <div class="container">
-      <a class="global-nav__brand" href="../index.html" data-text="company.name"></a>
-      <nav aria-label="주요 메뉴">
-        <ul class="global-nav__links">
-          <li><a href="../index.html">메인화면</a></li>
-          <li><a href="../about/index.html">캠프소개</a></li>
-          <li><a href="index.html" aria-current="page">일정표</a></li>
-          <li><a href="../location/index.html">오시는 길</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <header id="header"></header>
 
   <div class="sub-nav">
     <div class="container">
@@ -80,23 +70,7 @@
 
   </main>
 
-  <!-- 푸터 (전 페이지 공통): 회사 정보 → 가상 고지 → 문의처 -->
-  <footer class="footer">
-    <div class="container">
-      <p class="footer__notice" data-text="notice"></p>
-      <div class="footer__cols">
-        <div>
-          <h2>회사 정보</h2>
-          <p data-text="company.name"></p>
-        </div>
-        <div>
-          <h2>문의처</h2>
-          <p data-text="contact.dept"></p>
-          <p data-text="contact.email"></p>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <footer id="footer"></footer>
 
 </body>
 </html>

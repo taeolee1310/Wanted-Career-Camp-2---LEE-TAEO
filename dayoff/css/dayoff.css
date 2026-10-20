@@ -127,12 +127,12 @@ button:focus-visible {
 /* ---------- 서브 내비 (sub-nav-frosted) ---------- */
 .sub-nav {
   position: sticky;
-  top: 0;
+  top: 44px;
   z-index: 10;
-  background: rgba(245, 245, 247, 0.8);
+  background: color-mix(in srgb, var(--parchment) 80%, transparent);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   backdrop-filter: saturate(180%) blur(20px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 8%, transparent);
 }
 
 .sub-nav .container {

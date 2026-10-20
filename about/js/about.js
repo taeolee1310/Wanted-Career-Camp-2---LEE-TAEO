@@ -179,19 +179,5 @@
 
   /* ---------- 푸터 ---------- */
   const rows = (list) => list.map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('');
-  $('#footer-company-list').innerHTML = rows([
-    ['회사명', C.company.name]
-  ]);
-  $('#footer-contact-list').innerHTML = rows([
-    ['담당 부서', C.contact.dept],
-    ['이메일', C.contact.email]
-  ]);
 
-  /* ---------- 모바일 메뉴 ---------- */
-  const toggle = $('.gnav__toggle');
-  const links = $('#gnav-links');
-  toggle.addEventListener('click', () => {
-    const isOpen = links.classList.toggle('is-open');
-    toggle.setAttribute('aria-expanded', isOpen);
-  });
 })();

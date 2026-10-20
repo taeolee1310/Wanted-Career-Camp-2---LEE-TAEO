@@ -1,10 +1,3 @@
-const toggle = document.querySelector('.gnav__toggle');
-const links = document.getElementById('gnav-links');
-toggle.addEventListener('click', () => {
-  const open = links.classList.toggle('is-open');
-  toggle.setAttribute('aria-expanded', open);
-});
-
 const msg = document.getElementById('copy-msg');
 document.getElementById('copy-address').addEventListener('click', async () => {
   try {

@@ -5,22 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>오시는 길</title>
   <meta name="description" content="커리어 캠프 오프라인 장소 안내: 주소, 지도">
+  <script src="../js/theme.js"></script>
+  <link rel="stylesheet" href="../css/chrome.css">
   <link rel="stylesheet" href="css/location.css">
+  <script src="../content/data.js" defer></script>
+  <script src="../js/chrome.js" defer></script>
   <script src="js/location.js" defer></script>
 </head>
-<body>
-  <header class="gnav">
-    <nav class="gnav__inner" aria-label="주요 메뉴">
-      <a class="gnav__brand" href="../index.html">원티드랩</a>
-      <button class="gnav__toggle" type="button" aria-expanded="false" aria-controls="gnav-links">메뉴</button>
-      <ul class="gnav__links" id="gnav-links">
-        <li><a href="../index.html">메인화면</a></li>
-        <li><a href="../about/index.html">캠프소개</a></li>
-        <li><a href="../dayoff/index.html">일정표</a></li>
-        <li><a href="index.html" aria-current="page">오시는 길</a></li>
-      </ul>
-    </nav>
-  </header>
+<body data-page="location" data-root="../">
+  <header id="header"></header>
 
   <main>
     <section class="tile tile--light tile--center">
@@ -57,5 +50,6 @@
       </div>
     </section>
   </main>
+  <footer id="footer"></footer>
 </body>
 </html>

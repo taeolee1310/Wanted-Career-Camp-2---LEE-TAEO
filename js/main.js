@@ -1,33 +1,7 @@
 (function () {
   'use strict';
 
-  var header = document.getElementById('header');
-  var nav = document.getElementById('nav');
-  var menuBtn = document.getElementById('menuBtn');
-
-  window.addEventListener('scroll', function () {
-    header.classList.toggle('is-scrolled', window.scrollY > 10);
-  }, { passive: true });
-
-  /* 다크·라이트 토글 */
-  var themeBtn = document.getElementById('themeBtn');
-  function syncTheme() {
-    var dark = document.documentElement.getAttribute('data-theme') === 'dark';
-    themeBtn.setAttribute('aria-pressed', dark);
-    themeBtn.setAttribute('aria-label', dark ? '라이트 모드로 전환' : '다크 모드로 전환');
-  }
-  themeBtn.addEventListener('click', function () {
-    var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    try { localStorage.setItem('theme', next); } catch (e) {}
-    syncTheme();
-  });
-  syncTheme();
-
-  menuBtn.addEventListener('click', function () {
-    var open = nav.classList.toggle('is-open');
-    menuBtn.setAttribute('aria-expanded', open);
-  });
+  /* 상단 메뉴·다크 모드 토글·모바일 메뉴는 js/chrome.js가 모든 페이지에서 공통으로 처리한다 */
 
   /* 지원서 팝업 */
   var dlg = document.getElementById('applyDialog');
