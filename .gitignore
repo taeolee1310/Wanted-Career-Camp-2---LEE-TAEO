@@ -1,0 +1,35 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 에디터
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+
+# Node / Next.js (DEV_RULES 기본 스택)
+node_modules/
+.next/
+out/
+build/
+dist/
+*.tsbuildinfo
+next-env.d.ts
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# 환경 변수 (비밀 값)
+.env
+.env*.local
+
+# 기타
+.vercel/
+coverage/
+*.log
+
+# Claude Code 개인 설정
+.claude/settings.local.json
