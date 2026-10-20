@@ -1,10 +1,11 @@
-/* content/data.js 값으로 공통 헤더·푸터와 4개 페이지 본문을 그린다.
+/* content/data.js 값으로 공통 헤더·푸터와 3개 페이지 본문을 그린다.
    화면의 문구·날짜·숫자는 모두 data.js에서 가져온다. */
 (function () {
   'use strict';
 
   var C = window.CAMP;
   var page = document.body.dataset.page;
+  var ROOT = document.body.dataset.root || ''; // 하위 폴더 페이지(location/)는 '../'
   var WD = ['일', '월', '화', '수', '목', '금', '토'];
 
   /* ---------- 날짜 (KST) ---------- */
@@ -54,7 +55,7 @@
     { key: 'home', href: 'index.html', label: '메인화면' },
     { key: 'about', href: 'about.html', label: '캠프소개' },
     { key: 'schedule', href: 'schedule.html', label: '일정표' },
-    { key: 'location', href: 'location.html', label: '오시는 길' }
+    { key: 'location', href: 'location/index.html', label: '오시는 길' }
   ];
 
   function head(title) {
@@ -140,14 +141,18 @@
   /* ---------- 헤더·푸터 ---------- */
   function renderHeader() {
     var links = PAGES.map(function (p) {
-      return '<a href="' + p.href + '"' + (p.key === page ? ' aria-current="page"' : '') + '>' + p.label + '</a>';
+      return '<a href="' + ROOT + p.href + '"' + (p.key === page ? ' aria-current="page"' : '') + '>' + p.label + '</a>';
     }).join('');
+    var sun = '<svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+    var moon = '<svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg>';
     document.getElementById('header').innerHTML =
-      '<div class="container header__inner">' +
-      '<a href="index.html" class="logo">' + C.company.name + '<span>.</span></a>' +
+      '<div class="header__inner">' +
+      '<a href="' + ROOT + 'index.html" class="logo">' + C.company.name + '<span>.</span></a>' +
       '<nav class="nav" id="nav" aria-label="주요 메뉴">' + links + '</nav>' +
-      '<button class="menu-btn" id="menuBtn" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span><span></span></button>' +
-      '</div>';
+      '<div class="header__tools">' +
+      '<button type="button" class="icon-btn" id="themeBtn" aria-label="다크 모드 전환" aria-pressed="false">' + moon + sun + '</button>' +
+      '<button type="button" class="icon-btn menu-btn" id="menuBtn" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span><span></span></button>' +
+      '</div></div>';
   }
 
   function renderFooter() {
@@ -168,20 +173,44 @@
       '<div class="container footer__notice">' + C.notice + '</div>';
   }
 
+  /* 16주 로드맵 비주얼: 단계 폭은 주차에 비례, 오프라인 일정은 날짜 위치에 표시 */
+  function journey() {
+    var st = S('date-start'), en = S('date-end');
+    var segs = C.roadmap.map(function (p, i) {
+      var w = p.to - p.from + 1;
+      return '<li class="seg" style="flex:' + w + '"><span class="seg__no">0' + (i + 1) + '</span>' +
+        '<div><b>' + p.name + '</b><small>' + p.from + '–' + p.to + '주</small></div></li>';
+    }).join('');
+
+    var days = totalWeeks * 7, startMs = kstDay(ms(st.start));
+    var marks = offline().map(function (it, i, arr) {
+      var pct = Math.min(100, Math.max(0, (kstDay(ms(it.start)) - startMs + 1) / days * 100));
+      var cls = i === 0 ? ' mark--start' : (i === arr.length - 1 ? ' mark--end' : '');
+      var pos = cls ? (i === 0 ? 'left:0' : 'left:100%') : 'left:' + pct.toFixed(1) + '%';
+      return '<li class="mark' + cls + '" style="' + pos + '"><span>' + it.label + '</span><time>' + fmt(it.start, true) + '</time></li>';
+    }).join('');
+
+    return '<div class="journey reveal"><div class="journey__head">' +
+      '<h3 class="journey__title">' + totalWeeks + '주 로드맵</h3>' +
+      '<p class="journey__range">' + fmt(st.start, true) + ' → ' + fmt(en.start, true) + '</p></div>' +
+      '<ol class="track">' + segs + '</ol><ul class="marks">' + marks + '</ul></div>';
+  }
+
   /* ---------- 메인화면 ---------- */
   function home() {
     var st = status();
-    var core = C.benefits.slice(0, 3).map(function (b) {
-      return '<li><strong>' + benefitValue(b) + '</strong><span>' + b.name + '</span></li>';
+    var perks = C.benefits.slice(0, 3).map(function (b) {
+      return '<li class="perk reveal"><strong>' + benefitValue(b) + '</strong><h3>' + b.name + '</h3><p>' + benefitDetail(b) + '</p></li>';
     }).join('');
 
     var hero = '<section class="hero"><div class="container">' +
-      '<p class="eyebrow reveal"><span class="dot"></span>' + campTitle + ' · ' + st.label + (st.note ? ' · ' + st.note : '') + '</p>' +
+      '<p class="chip reveal">' + st.label + (st.note ? ' · ' + st.note : '') + '</p>' +
+      '<p class="eyebrow reveal">' + campTitle + '</p>' +
       '<h1 class="reveal">' + C.copy.headline[0] + '</h1>' +
       '<p class="lead reveal">' + C.copy.sub + '</p>' +
-      '<ul class="core reveal">' + core + '</ul>' +
+      '<div class="hero__actions reveal">' + applyBtn('') + '<a class="btn btn--ghost" href="schedule.html">일정 보기</a></div>' +
       '<p class="hero__meta reveal">정원 ' + C.camp.capacity + '명 · ' + C.camp.jobs.join(' · ') + ' · 지원 마감 ' + fmt(S('date-close').start) + '</p>' +
-      applyBtn(' reveal') +
+      journey() +
       '</div></section>';
 
     var personas = '<ul class="personas">' + C.personas.map(function (p) {
@@ -199,9 +228,13 @@
 
     var L = C.location;
     var loc = defs([['장소', L.name], ['주소', L.address], ['지하철', L.subway]]) +
-      '<p class="more reveal"><a href="location.html">오시는 길 보기 →</a></p>';
+      '<p class="more reveal"><a href="location/index.html">오시는 길 보기 →</a></p>';
+
+    var perkBody = '<ul class="perks">' + perks + '</ul>' +
+      '<p class="more reveal"><a href="about.html#benefits">혜택 전체 보기 →</a></p>';
 
     return hero +
+      section('perks', '캠프가 드리는 것', perkBody) +
       section('empathy', '이런 고민, 있으셨나요', personas) +
       section('message', '캠프가 보는 것', message, 'dark') +
       section('schedule-summary', '일정 요약', summary) +
@@ -247,7 +280,7 @@
         ['기간', fmt(d.start) + ' ~ ' + fmt(e.start) + ' (총 ' + totalWeeks + '주)'],
         ['시간', E.time],
         ['방식', E.mode],
-        ['장소', '<a href="location.html">' + C.location.name + '</a>'],
+        ['장소', '<a href="location/index.html">' + C.location.name + '</a>'],
         ['정원', C.camp.capacity + '명']
       ]) + '</div></div>';
 
@@ -291,35 +324,25 @@
       section('recruit', '캠프 일정 (KST)', recruit) +
       section('roadmap', '단계별 로드맵', roadmap, true) +
       section('timetable', '주간 시간표', week) +
-      section('offline', '오프라인 일정', offlineList() + '<p class="more reveal"><a href="location.html">오시는 길 보기 →</a></p>', true);
-  }
-
-  /* ---------- 오시는 길 ---------- */
-  function location_() {
-    var L = C.location;
-    var map = '<figure class="map reveal"><img src="' + L.map + '" alt="' + L.name + ' 가상 약도: 한울역 3번 출구에서 새벽로를 따라 도보 5분"></figure>';
-    var info = defs([['장소명', L.name], ['주소', L.address], ['지하철', L.subway], ['버스', L.bus], ['주차', L.parking]]);
-
-    return pageTitle('LOCATION', '오시는 길', L.address) +
-      section('map', '약도', map) +
-      section('address', '주소와 교통', info, true) +
-      section('offline', '오프라인 일정 안내', '<p class="muted reveal">아래 날짜에만 캠퍼스로 모입니다. 나머지는 온라인으로 진행해요.</p>' + offlineList());
+      section('offline', '오프라인 일정', offlineList() + '<p class="more reveal"><a href="location/index.html">오시는 길 보기 →</a></p>', true);
   }
 
   /* ---------- 실행 ---------- */
-  var builders = { home: home, about: about, schedule: schedule, location: location_ };
+  var builders = { home: home, about: about, schedule: schedule };
   var titles = {
     home: campTitle + ' | ' + C.company.name,
     about: '캠프소개 | ' + campTitle,
-    schedule: '일정표 | ' + campTitle,
-    location: '오시는 길 | ' + campTitle
+    schedule: '일정표 | ' + campTitle
   };
 
   renderHeader();
-  document.getElementById('main').innerHTML = builders[page]();
+  // location/ 페이지는 본문이 HTML에 직접 있어서 헤더·푸터만 공통으로 그린다
+  if (builders[page]) {
+    document.getElementById('main').innerHTML = builders[page]();
+    document.title = titles[page];
+    var meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.content = C.camp.definition;
+  }
   renderFooter();
   renderApplyDialog();
-  document.title = titles[page];
-  var meta = document.querySelector('meta[name="description"]');
-  if (meta) meta.content = C.camp.definition;
 })();
