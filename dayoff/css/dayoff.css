@@ -1,4 +1,32 @@
-/* 일정표 페이지 (page/dayoff.html) — 색·간격은 tokens.css 변수만 쓴다 */
+/* 일정표·휴강일 페이지 (dayoff/index.html)
+   토큰: DESIGN-apple.md 값. 이름은 css/style.css의 :root와 같게 쓴다. */
+:root {
+  --primary: #0066cc;
+  --primary-focus: #0071e3;
+  --primary-on-dark: #2997ff;
+  --ink: #1d1d1f;
+  --ink-muted-80: #333333;
+  --ink-muted-48: #7a7a7a;
+  --body-muted: #cccccc;
+  --hairline: #e0e0e0;
+  --divider-soft: #f0f0f0;
+  --canvas: #ffffff;
+  --parchment: #f5f5f7;
+  --tile-dark: #272729;
+  --tile-dark-2: #2a2a2c;
+  --black: #000000;
+  --on-dark: #ffffff;
+
+  --r-lg: 18px;
+  --r-pill: 9999px;
+
+  --s-xxs: 4px; --s-xs: 8px; --s-sm: 12px; --s-md: 17px;
+  --s-lg: 24px; --s-xl: 32px; --s-xxl: 48px; --s-section: 80px;
+
+  --font-display: "SF Pro Display", system-ui, -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", "Inter", sans-serif;
+  --font-text: "SF Pro Text", system-ui, -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", "Inter", sans-serif;
+  --max: 980px;
+}
 
 *,
 *::before,
@@ -12,8 +40,8 @@ html {
 
 body {
   margin: 0;
-  background: var(--color-canvas);
-  color: var(--color-ink);
+  background: var(--canvas);
+  color: var(--ink);
   font-family: var(--font-text);
   font-size: 17px;
   line-height: 1.47;
@@ -40,27 +68,27 @@ ul {
 }
 
 a {
-  color: var(--color-primary);
+  color: var(--primary);
   text-decoration: none;
 }
 
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid var(--color-primary-focus);
+  outline: 2px solid var(--primary-focus);
   outline-offset: 2px;
 }
 
 .container {
   width: 100%;
-  max-width: var(--content-max);
+  max-width: var(--max);
   margin: 0 auto;
-  padding: 0 var(--space-lg);
+  padding: 0 var(--s-lg);
 }
 
 /* ---------- 페이지 이동 (global-nav) ---------- */
 .global-nav {
-  background: var(--color-surface-black);
-  color: var(--color-body-on-dark);
+  background: var(--black);
+  color: var(--on-dark);
   font-size: 12px;
   letter-spacing: -0.12px;
 }
@@ -69,30 +97,30 @@ button:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-md);
+  gap: var(--s-md);
   min-height: 44px;
 }
 
 .global-nav__brand {
-  color: var(--color-body-on-dark);
+  color: var(--on-dark);
   font-weight: 600;
   white-space: nowrap;
 }
 
 .global-nav__links {
   display: flex;
-  gap: var(--space-lg);
+  gap: var(--s-lg);
 }
 
 .global-nav__links a {
-  color: var(--color-body-muted);
+  color: var(--body-muted);
   display: inline-block;
-  padding: var(--space-sm) 0;
+  padding: var(--s-sm) 0;
   white-space: nowrap;
 }
 
 .global-nav__links a[aria-current="page"] {
-  color: var(--color-body-on-dark);
+  color: var(--on-dark);
 }
 
 /* ---------- 서브 내비 (sub-nav-frosted) ---------- */
@@ -110,7 +138,7 @@ button:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-sm);
+  gap: var(--s-sm);
   min-height: 52px;
 }
 
@@ -124,15 +152,15 @@ button:focus-visible {
 .sub-nav__right {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
+  gap: var(--s-sm);
 }
 
 /* ---------- 버튼 ---------- */
 .btn-primary {
   display: inline-block;
-  background: var(--color-primary);
-  color: var(--color-on-primary);
-  border-radius: var(--rounded-pill);
+  background: var(--primary);
+  color: var(--on-dark);
+  border-radius: var(--r-pill);
   padding: 11px 22px;
   font-size: 17px;
   line-height: 1;
@@ -152,10 +180,10 @@ button:focus-visible {
 /* ---------- 상태 배지 ---------- */
 .status {
   display: inline-block;
-  padding: var(--space-xxs) var(--space-sm);
-  border-radius: var(--rounded-pill);
-  background: var(--color-canvas);
-  border: 1px solid var(--color-hairline);
+  padding: var(--s-xxs) var(--s-sm);
+  border-radius: var(--r-pill);
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
   font-size: 14px;
   font-weight: 600;
   letter-spacing: -0.224px;
@@ -163,38 +191,38 @@ button:focus-visible {
 }
 
 .status[data-state="open"] {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
+  border-color: var(--primary);
+  color: var(--primary);
 }
 
 .status[data-state="closed"] {
-  color: var(--color-ink-muted-48);
+  color: var(--ink-muted-48);
 }
 
 /* ---------- 섹션 타일 ---------- */
 .tile {
-  padding: var(--space-section) 0;
+  padding: var(--s-section) 0;
 }
 
 .tile--parchment {
-  background: var(--color-canvas-parchment);
+  background: var(--parchment);
 }
 
 .tile--dark {
-  background: var(--color-surface-tile-1);
-  color: var(--color-body-on-dark);
+  background: var(--tile-dark);
+  color: var(--on-dark);
 }
 
 .tile__eyebrow {
   font-size: 14px;
   font-weight: 600;
   letter-spacing: -0.224px;
-  color: var(--color-ink-muted-48);
-  margin-bottom: var(--space-xs);
+  color: var(--ink-muted-48);
+  margin-bottom: var(--s-xs);
 }
 
 .tile--dark .tile__eyebrow {
-  color: var(--color-body-muted);
+  color: var(--body-muted);
 }
 
 .tile__title {
@@ -205,16 +233,16 @@ button:focus-visible {
 }
 
 .tile__lead {
-  margin-top: var(--space-sm);
-  color: var(--color-ink-muted-80);
+  margin-top: var(--s-sm);
+  color: var(--ink-muted-80);
 }
 
 .tile--dark .tile__lead {
-  color: var(--color-body-muted);
+  color: var(--body-muted);
 }
 
 .tile__head {
-  margin-bottom: var(--space-xxl);
+  margin-bottom: var(--s-xxl);
 }
 
 /* ---------- 히어로 ---------- */
@@ -231,7 +259,7 @@ button:focus-visible {
 }
 
 .hero__lead {
-  margin-top: var(--space-md);
+  margin-top: var(--s-md);
   font-family: var(--font-display);
   font-size: 28px;
   line-height: 1.14;
@@ -242,13 +270,13 @@ button:focus-visible {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: var(--space-sm) var(--space-xl);
-  margin-top: var(--space-xl);
+  gap: var(--s-sm) var(--s-xl);
+  margin-top: var(--s-xl);
 }
 
 .hero__facts dt {
   font-size: 14px;
-  color: var(--color-ink-muted-48);
+  color: var(--ink-muted-48);
   letter-spacing: -0.224px;
 }
 
@@ -257,20 +285,20 @@ button:focus-visible {
 }
 
 .hero__cta {
-  margin-top: var(--space-xl);
+  margin-top: var(--s-xl);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: var(--space-sm);
+  gap: var(--s-sm);
 }
 
 /* ---------- 모집 일정 타임라인 ---------- */
 .timeline {
   position: relative;
   display: grid;
-  gap: var(--space-lg);
-  padding-left: var(--space-xl);
+  gap: var(--s-lg);
+  padding-left: var(--s-xl);
 }
 
 .timeline::before {
@@ -280,7 +308,7 @@ button:focus-visible {
   top: 6px;
   bottom: 6px;
   width: 2px;
-  background: var(--color-hairline);
+  background: var(--hairline);
 }
 
 .timeline__item {
@@ -290,23 +318,23 @@ button:focus-visible {
 .timeline__item::before {
   content: "";
   position: absolute;
-  left: calc(-1 * var(--space-xl));
+  left: calc(-1 * var(--s-xl));
   top: 6px;
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: var(--color-canvas);
-  border: 2px solid var(--color-hairline);
+  background: var(--canvas);
+  border: 2px solid var(--hairline);
 }
 
 .timeline__item[data-state="done"]::before {
-  background: var(--color-ink-muted-48);
-  border-color: var(--color-ink-muted-48);
+  background: var(--ink-muted-48);
+  border-color: var(--ink-muted-48);
 }
 
 .timeline__item[data-state="now"]::before {
-  background: var(--color-primary);
-  border-color: var(--color-primary);
+  background: var(--primary);
+  border-color: var(--primary);
 }
 
 .timeline__label {
@@ -315,7 +343,7 @@ button:focus-visible {
 
 .timeline__item[data-state="done"] .timeline__label,
 .timeline__item[data-state="done"] .timeline__date {
-  color: var(--color-ink-muted-48);
+  color: var(--ink-muted-48);
 }
 
 .timeline__date {
@@ -325,54 +353,54 @@ button:focus-visible {
 .timeline__note {
   font-size: 14px;
   letter-spacing: -0.224px;
-  color: var(--color-ink-muted-80);
+  color: var(--ink-muted-80);
 }
 
 /* ---------- 로드맵 카드 ---------- */
 .roadmap {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: var(--space-lg);
+  gap: var(--s-lg);
 }
 
 .card {
-  background: var(--color-canvas);
-  border: 1px solid var(--color-hairline);
-  border-radius: var(--rounded-lg);
-  padding: var(--space-lg);
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  padding: var(--s-lg);
 }
 
 .card__meta {
   font-size: 14px;
   font-weight: 600;
   letter-spacing: -0.224px;
-  color: var(--color-primary);
+  color: var(--primary);
 }
 
 .card__title {
-  margin-top: var(--space-xxs);
+  margin-top: var(--s-xxs);
   font-size: 21px;
   font-weight: 600;
   line-height: 1.19;
 }
 
 .card__period {
-  margin-top: var(--space-xxs);
+  margin-top: var(--s-xxs);
   font-size: 14px;
   letter-spacing: -0.224px;
-  color: var(--color-ink-muted-48);
+  color: var(--ink-muted-48);
   font-variant-numeric: tabular-nums;
 }
 
 .card__body {
-  margin-top: var(--space-sm);
-  color: var(--color-ink-muted-80);
+  margin-top: var(--s-sm);
+  color: var(--ink-muted-80);
 }
 
 .card__output {
-  margin-top: var(--space-md);
-  padding-top: var(--space-sm);
-  border-top: 1px solid var(--color-divider-soft);
+  margin-top: var(--s-md);
+  padding-top: var(--s-sm);
+  border-top: 1px solid var(--divider-soft);
   font-size: 14px;
   letter-spacing: -0.224px;
 }
@@ -383,23 +411,23 @@ button:focus-visible {
 }
 
 .sum-check {
-  margin-top: var(--space-lg);
+  margin-top: var(--s-lg);
   font-size: 14px;
   letter-spacing: -0.224px;
-  color: var(--color-ink-muted-48);
+  color: var(--ink-muted-48);
 }
 
 /* ---------- 주간 시간표 (어두운 타일) ---------- */
 .week {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: var(--space-sm);
+  gap: var(--s-sm);
 }
 
 .week__day {
-  background: var(--color-surface-tile-2);
-  border-radius: var(--rounded-lg);
-  padding: var(--space-lg) var(--space-md);
+  background: var(--tile-dark-2);
+  border-radius: var(--r-lg);
+  padding: var(--s-lg) var(--s-md);
 }
 
 .week__name {
@@ -408,55 +436,55 @@ button:focus-visible {
 }
 
 .week__slot {
-  margin-top: var(--space-sm);
+  margin-top: var(--s-sm);
 }
 
 .week__time {
   display: block;
   font-size: 14px;
   letter-spacing: -0.224px;
-  color: var(--color-body-muted);
+  color: var(--body-muted);
   font-variant-numeric: tabular-nums;
 }
 
 .week__tag {
   display: inline-block;
-  margin-top: var(--space-sm);
+  margin-top: var(--s-sm);
   font-size: 12px;
   letter-spacing: -0.12px;
-  color: var(--color-primary-on-dark);
+  color: var(--primary-on-dark);
 }
 
 .tile--dark .tile__note {
-  margin-top: var(--space-lg);
+  margin-top: var(--s-lg);
   font-size: 14px;
   letter-spacing: -0.224px;
-  color: var(--color-body-muted);
+  color: var(--body-muted);
 }
 
 /* ---------- 오프라인 일정 · 휴강일 ---------- */
 .split {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--space-xxl);
+  gap: var(--s-xxl);
 }
 
 .split__title {
   font-size: 21px;
   font-weight: 600;
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--s-md);
 }
 
 .rows li {
   display: grid;
   grid-template-columns: 9.5em 1fr;
-  gap: var(--space-sm);
-  padding: var(--space-md) 0;
-  border-bottom: 1px solid var(--color-hairline);
+  gap: var(--s-sm);
+  padding: var(--s-md) 0;
+  border-bottom: 1px solid var(--hairline);
 }
 
 .rows li:first-child {
-  border-top: 1px solid var(--color-hairline);
+  border-top: 1px solid var(--hairline);
 }
 
 .rows time {
@@ -468,19 +496,19 @@ button:focus-visible {
   display: block;
   font-size: 14px;
   letter-spacing: -0.224px;
-  color: var(--color-ink-muted-48);
+  color: var(--ink-muted-48);
 }
 
 .split__more {
-  margin-top: var(--space-md);
+  margin-top: var(--s-md);
   font-size: 14px;
   letter-spacing: -0.224px;
 }
 
 /* ---------- 푸터 ---------- */
 .footer {
-  background: var(--color-canvas-parchment);
-  color: var(--color-ink-muted-80);
+  background: var(--parchment);
+  color: var(--ink-muted-80);
   padding: 64px 0;
   font-size: 12px;
   line-height: 1.6;
@@ -488,27 +516,27 @@ button:focus-visible {
 }
 
 .footer__notice {
-  padding-bottom: var(--space-md);
-  margin-bottom: var(--space-md);
-  border-bottom: 1px solid var(--color-hairline);
+  padding-bottom: var(--s-md);
+  margin-bottom: var(--s-md);
+  border-bottom: 1px solid var(--hairline);
 }
 
 .footer__cols {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--space-lg);
+  gap: var(--s-lg);
 }
 
 .footer h2 {
   font-size: 14px;
   font-weight: 600;
-  color: var(--color-ink);
-  margin-bottom: var(--space-xs);
+  color: var(--ink);
+  margin-bottom: var(--s-xs);
 }
 
 .footer__legal {
-  margin-top: var(--space-lg);
-  color: var(--color-ink-muted-48);
+  margin-top: var(--s-lg);
+  color: var(--ink-muted-48);
 }
 
 /* ---------- 반응형 (DESIGN-apple.md 기준점) ---------- */
@@ -525,7 +553,7 @@ button:focus-visible {
 
   .split {
     grid-template-columns: 1fr;
-    gap: var(--space-xxl);
+    gap: var(--s-xxl);
   }
 }
 
@@ -535,7 +563,7 @@ button:focus-visible {
   }
 
   .tile {
-    padding: var(--space-xxl) 0;
+    padding: var(--s-xxl) 0;
   }
 
   .hero__title {
@@ -568,7 +596,7 @@ button:focus-visible {
 
   .rows li {
     grid-template-columns: 1fr;
-    gap: var(--space-xxs);
+    gap: var(--s-xxs);
   }
 }
 
@@ -578,7 +606,7 @@ button:focus-visible {
   }
 
   .global-nav__links {
-    gap: var(--space-md);
+    gap: var(--s-md);
   }
 
   .sub-nav__right .status {
