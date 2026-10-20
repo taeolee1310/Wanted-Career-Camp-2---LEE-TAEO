@@ -149,16 +149,42 @@ button:focus-visible {
   letter-spacing: 0.231px;
 }
 
+/* 페이지 안 이동 — 위 global-nav(글자 링크)와 구분되도록 알약 칩으로 둔다 */
 .sub-nav__links {
   display: flex;
-  gap: var(--s-md);
-  font-size: 14px;
-  letter-spacing: -0.224px;
+  gap: var(--s-xs);
+  padding: var(--s-xs) 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.sub-nav__links::-webkit-scrollbar {
+  display: none;
 }
 
 .sub-nav__links a {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 var(--s-md);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-pill);
+  background: var(--canvas);
   color: var(--ink);
-  padding: var(--s-sm) 0;
+  font-size: 14px;
+  letter-spacing: -0.224px;
+  white-space: nowrap;
+}
+
+.sub-nav__links a[aria-current="location"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--on-dark);
+}
+
+.sub-nav__links a:active {
+  transform: scale(0.95);
 }
 
 /* ---------- 섹션 타일 ---------- */
@@ -488,10 +514,10 @@ button:focus-visible {
   }
 
   .sub-nav__title {
-    font-size: 17px;
+    display: none;
   }
 
-  .sub-nav__links {
-    gap: var(--s-sm);
+  .sub-nav__links a {
+    padding: 0 var(--s-sm);
   }
 }

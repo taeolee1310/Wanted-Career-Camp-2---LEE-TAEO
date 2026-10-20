@@ -113,4 +113,28 @@
     return '<li id="' + d.id + '"><time datetime="' + new Date(d.t).toISOString().slice(0, 10) + '">' + fmt(d.t) + '</time>' +
       '<span>' + esc(d.label) + '<small>' + d.week + '주차' + (p ? ' · ' + esc(p.name) : '') + '</small></span></li>';
   }).join('');
+
+  /* ---------- 페이지 안 이동: 지금 보고 있는 구역의 칩을 채운다 ---------- */
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.sub-nav__links a'));
+  var targets = chips.map(function (a) { return document.querySelector(a.dataset.spy || a.getAttribute('href')); });
+  function markChip() {
+    var line = window.innerHeight * 0.35, current = null, prevTop = null;
+    targets.forEach(function (t, i) {
+      if (!t) return;
+      var top = t.getBoundingClientRect().top;
+      // 오프라인·휴강일처럼 나란히 놓인 구역은 앞의 칩을 남긴다
+      if (top <= line && (prevTop === null || top - prevTop > 4)) current = i;
+      prevTop = top;
+    });
+    chips.forEach(function (a, i) {
+      if (i === current) a.setAttribute('aria-current', 'location');
+      else a.removeAttribute('aria-current');
+    });
+    var bar = chips[0] && chips[0].parentNode;
+    if (current !== null && bar.scrollWidth > bar.clientWidth) {
+      bar.scrollLeft = chips[current].offsetLeft - 16;
+    }
+  }
+  window.addEventListener('scroll', markChip, { passive: true });
+  markChip();
 })();

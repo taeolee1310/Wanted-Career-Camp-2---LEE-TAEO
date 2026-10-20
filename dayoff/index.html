@@ -28,11 +28,11 @@
 
   <div class="sub-nav">
     <div class="container">
-      <span class="sub-nav__title">휴강일</span>
+      <span class="sub-nav__title">휴강일 안내</span>
       <nav class="sub-nav__links" aria-label="이 페이지 안 이동">
         <a href="#roadmap">로드맵</a>
         <a href="#weekly">시간표</a>
-        <a href="#offline">오프라인</a>
+        <a href="#offline" data-spy="#offline-col">오프라인</a>
         <a href="#dayoff">휴강일</a>
       </nav>
     </div>
@@ -85,7 +85,7 @@
           <p class="tile__lead">모든 날짜는 한국 시간(KST) 기준이에요.</p>
         </div>
         <div class="split">
-          <div>
+          <div id="offline-col">
             <h3 class="split__title">오프라인 일정</h3>
             <ul class="rows" id="offline-list"></ul>
             <p class="split__more"><a href="../location.html">장소와 오시는 길 보기 ›</a></p>
