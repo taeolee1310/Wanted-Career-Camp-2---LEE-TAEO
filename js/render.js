@@ -27,6 +27,8 @@
   function dday(iso) { return kstDay(ms(iso)) - kstDay(Date.now()); }
   function S(id) { return C.schedule.filter(function (x) { return x.id === id; })[0]; }
 
+  function isClosed() { return Date.now() > ms(S('date-close').start); }
+
   function status() {
     var close = S('date-close');
     if (Date.now() <= ms(close.start)) {
@@ -60,7 +62,7 @@
     var st = status(), close = S('date-close');
     return '<section class="section cta"><div class="container cta__inner reveal">' +
       '<div><h2 class="cta__title">' + campTitle + '</h2>' +
-      '<p class="muted">' + st.label + (st.note ? ' · ' + st.note : '') + ' · 지원 마감 ' + fmt(close.start) + '</p></div>' +
+      '<p class="muted">' + (isClosed() ? fmt(close.start) + '에 지원이 마감됐어요' : st.label + (st.note ? ' · ' + st.note : '') + ' · 지원 마감 ' + fmt(close.start)) + '</p></div>' +
       applyBtn('') + '</div></section>';
   }
 
@@ -82,6 +84,7 @@
       '<p class="eyebrow">' + campTitle + '</p>' +
       '<h2 class="modal__title" id="applyTitle">' + F.title + '</h2>' +
       '<p class="muted">' + F.lead + '</p>' +
+      (isClosed() ? '<p class="form-note">' + F.closedNote + '</p>' : '') +
       '<label class="field"><span>' + L.name + '</span><input class="input" name="name" type="text" autocomplete="name" placeholder="' + P.name + '" required></label>' +
       '<label class="field"><span>' + L.email + '</span><input class="input" name="email" type="email" autocomplete="email" placeholder="' + P.email + '" required></label>' +
       '<label class="field"><span>' + L.phone + '</span><input class="input" name="phone" type="tel" autocomplete="tel" placeholder="' + P.phone + '" required></label>' +
@@ -162,7 +165,7 @@
       '<h1 class="reveal">' + C.camp.tagline + '</h1>' +
       '<p class="lead reveal">' + C.camp.definition + '</p>' +
       '<div class="hero__actions reveal">' + applyBtn('') + '</div>' +
-      '<p class="hero__meta reveal">정원 ' + C.camp.capacity + '명 · ' + C.camp.jobs.join(' · ') + ' · 지원 마감 ' + fmt(S('date-close').start) + '</p>' +
+      '<p class="hero__meta reveal">선착순 ' + C.camp.capacity + '명 · ' + C.camp.jobs.join(' · ') + ' 직군 대상 · ' + (isClosed() ? fmt(S('date-close').start) + '에 지원이 마감됐어요' : '지원 마감 ' + fmt(S('date-close').start)) + '</p>' +
       journey() +
       '</div></section>';
 
@@ -176,9 +179,9 @@
       '<p class="more reveal"><a href="about/index.html#benefits">혜택 전체 보기 →</a></p>';
 
     return hero +
-      section('perks', '캠프가 드리는 것', perkBody) +
-      section('schedule-summary', '일정 요약', summary) +
-      section('location-summary', '위치', loc, true) +
+      section('perks', '캠프에서 받는 혜택', perkBody) +
+      section('schedule-summary', '꼭 알아야 할 날짜', summary) +
+      section('location-summary', '오시는 곳', loc, true) +
       cta();
   }
 

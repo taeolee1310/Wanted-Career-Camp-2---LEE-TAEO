@@ -24,14 +24,15 @@ window.CAMP = {
     labels: { name: '이름', email: '이메일', phone: '연락처', job: '희망 직군', motive: '지원 동기' },
     placeholders: { name: '홍길동', email: 'name@example.com', phone: '010-0000-0000', motive: '캠프에서 만들고 싶은 결과물과 지원 이유를 적어 주세요.' },
     jobPlaceholder: '직군을 선택해 주세요',
-    consent: '입력한 정보는 수업용 데모라 서버로 전송되거나 저장되지 않는다는 점을 확인했어요.',
+    consent: '수업용 데모라 입력한 정보는 전송·저장되지 않는다는 점을 확인했어요.',
+    closedNote: '모집은 마감됐지만, 수업용 페이지라 지원서 작성을 체험해 볼 수 있어요.',
     submit: '제출하기',
     cancel: '취소',
     close: '닫기',
     error: '비어 있거나 형식이 맞지 않는 항목이 있어요. 표시된 칸을 확인해 주세요.',
     doneTitle: '지원서가 접수되었어요',
-    doneText: '{name}님, 신청서 검토 후 개별 연락드려요.',
-    doneNote: '(가상 접수 · 실제로 전송되지 않았습니다)'
+    doneText: '{name}님, 신청서를 검토한 뒤 개별로 연락드려요.',
+    doneNote: '가상 접수예요. 입력한 정보는 어디로도 전송되지 않았어요.'
   },
 
   schedule: [

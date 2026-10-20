@@ -69,7 +69,7 @@ ul {
 }
 
 a {
-  color: var(--primary);
+  color: var(--link-text, var(--primary));
   text-decoration: none;
 }
 
@@ -90,7 +90,7 @@ button:focus-visible {
 .global-nav {
   background: var(--black);
   color: var(--on-dark);
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: -0.12px;
 }
 
@@ -173,7 +173,7 @@ button:focus-visible {
   border-radius: var(--r-pill);
   background: var(--canvas);
   color: var(--ink);
-  font-size: 14px;
+  font-size: 15px;
   letter-spacing: -0.224px;
   white-space: nowrap;
 }
@@ -203,7 +203,7 @@ button:focus-visible {
 }
 
 .tile__eyebrow {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   letter-spacing: -0.224px;
   color: var(--ink-muted-48);
@@ -264,7 +264,7 @@ button:focus-visible {
 }
 
 .hero__facts dt {
-  font-size: 14px;
+  font-size: 15px;
   color: var(--ink-muted-48);
   letter-spacing: -0.224px;
 }
@@ -298,10 +298,10 @@ button:focus-visible {
 }
 
 .card__meta {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   letter-spacing: -0.224px;
-  color: var(--primary);
+  color: var(--link-text, var(--primary));
 }
 
 .card__title {
@@ -313,7 +313,7 @@ button:focus-visible {
 
 .card__period {
   margin-top: var(--s-xxs);
-  font-size: 14px;
+  font-size: 15px;
   letter-spacing: -0.224px;
   color: var(--ink-muted-48);
   font-variant-numeric: tabular-nums;
@@ -328,7 +328,7 @@ button:focus-visible {
   margin-top: var(--s-md);
   padding-top: var(--s-sm);
   border-top: 1px solid var(--divider-soft);
-  font-size: 14px;
+  font-size: 15px;
   letter-spacing: -0.224px;
 }
 
@@ -339,7 +339,7 @@ button:focus-visible {
 
 .sum-check {
   margin-top: var(--s-lg);
-  font-size: 14px;
+  font-size: 15px;
   letter-spacing: -0.224px;
   color: var(--ink-muted-48);
 }
@@ -368,7 +368,7 @@ button:focus-visible {
   gap: var(--s-xs);
   align-items: start;
   margin-top: var(--s-md);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.5;
   letter-spacing: -0.12px;
   color: var(--body-muted);
@@ -398,7 +398,7 @@ button:focus-visible {
 
 .tile--dark .tile__note {
   margin-top: var(--s-lg);
-  font-size: 14px;
+  font-size: 15px;
   letter-spacing: -0.224px;
   color: var(--body-muted);
 }
@@ -435,14 +435,14 @@ button:focus-visible {
 
 .rows small {
   display: block;
-  font-size: 14px;
+  font-size: 15px;
   letter-spacing: -0.224px;
   color: var(--ink-muted-48);
 }
 
 .split__more {
   margin-top: var(--s-md);
-  font-size: 14px;
+  font-size: 15px;
   letter-spacing: -0.224px;
 }
 
@@ -451,7 +451,7 @@ button:focus-visible {
   background: var(--parchment);
   color: var(--ink-muted-80);
   padding: 64px 0;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.6;
   letter-spacing: -0.12px;
 }
@@ -469,7 +469,7 @@ button:focus-visible {
 }
 
 .footer h2 {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--ink);
   margin-bottom: var(--s-xs);

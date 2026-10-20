@@ -3,6 +3,7 @@
    홈(css/style.css)과 서브 페이지(about, dayoff, location)가 모두 이 파일을 읽는다. */
 
 :root {
+  --link-text: #0066cc;
   --ch-nav: #000000;
   --ch-nav-text: #cccccc;
   --ch-footer-bg: #f5f5f7;
@@ -30,7 +31,14 @@
   --ink-muted: #98989d;
   --hairline: #38383a;
   --divider-soft: #2a2a2c;
-  --primary: #0071e3;
+  --primary: #0068d4;
+  --link-text: #2997ff;
+}
+
+/* 라이트 모드 보조 글자색: 흰색·파치먼트 위에서 4.5:1 이상 */
+:root[data-theme="light"] {
+  --ink-muted-48: #636366;
+  --ink-muted: #636366;
 }
 
 /* 세로 스크롤바 유무 때문에 페이지마다 헤더 위치가 밀리지 않게 한다 */
@@ -38,14 +46,14 @@ html { overflow-y: scroll; }
 body { transition: background-color .25s, color .25s; }
 
 /* ---------- 헤더 ---------- */
-#header { position: sticky; top: 0; z-index: 100; height: 44px; background: var(--ch-nav); color: #fff; font-family: var(--ch-font); font-size: 12px; line-height: 1.47; letter-spacing: -0.12px; }
+#header { position: sticky; top: 0; z-index: 100; height: 44px; background: var(--ch-nav); color: #fff; font-family: var(--ch-font); font-size: 13px; line-height: 1.47; letter-spacing: -0.12px; }
 :root[data-theme="dark"] #header { border-bottom: 1px solid #2a2a2c; }
 #header .header__inner { display: flex; align-items: center; gap: 24px; height: 44px; width: min(932px, 100% - 48px); margin-inline: auto; padding: 0; max-width: none; }
 #header a { text-decoration: none; }
-#header .logo { display: inline-flex; align-items: center; font-family: var(--ch-font-display); font-weight: 600; font-size: 14px; letter-spacing: -0.2px; color: #fff; white-space: nowrap; }
+#header .logo { display: inline-flex; align-items: center; font-family: var(--ch-font-display); font-weight: 600; font-size: 15px; letter-spacing: -0.2px; color: #fff; white-space: nowrap; }
 #header .logo span { color: var(--ch-logo-dot); }
 #header .nav { display: flex; gap: 20px; margin: 0 0 0 auto; padding: 0; background: none; }
-#header .nav a { display: block; min-height: 0; padding: 0; line-height: 44px; font-size: 12px; font-weight: 400; letter-spacing: -0.12px; color: var(--ch-nav-text); opacity: 1; white-space: nowrap; }
+#header .nav a { display: block; min-height: 0; padding: 0; line-height: 44px; font-size: 13px; font-weight: 400; letter-spacing: -0.12px; color: var(--ch-nav-text); opacity: 1; white-space: nowrap; }
 #header .nav a:hover, #header .nav a[aria-current="page"] { color: #fff; }
 #header .header__tools { display: flex; align-items: center; gap: 4px; }
 /* 넓은 화면에선 테마 버튼을 본문 폭 밖으로 빼서, 메뉴 위치가 모든 페이지에서 같게 한다 */
@@ -65,19 +73,19 @@ body { transition: background-color .25s, color .25s; }
   #header .menu-btn { display: flex; }
   #header .nav { position: absolute; top: 44px; left: 0; right: 0; margin: 0; flex-direction: column; gap: 0; background: var(--ch-nav); display: none; padding-bottom: 8px; }
   #header .nav.is-open { display: flex; }
-  #header .nav a { padding: 0 24px; font-size: 14px; }
+  #header .nav a { padding: 0 24px; font-size: 15px; }
   #header .header__tools { margin-left: auto; }
 }
 
 /* ---------- 푸터 ---------- */
-#footer { background: var(--ch-footer-bg); color: var(--ch-footer-ink); padding: 64px 0 32px; font-family: var(--ch-font); font-size: 12px; letter-spacing: -0.12px; line-height: 1.6; }
+#footer { background: var(--ch-footer-bg); color: var(--ch-footer-ink); padding: 64px 0 32px; font-family: var(--ch-font); font-size: 13px; letter-spacing: -0.12px; line-height: 1.6; }
 #footer .container { width: min(980px, 100% - 48px); max-width: none; margin-inline: auto; padding: 0; }
 #footer .footer__grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 48px; border: 0; }
 #footer .logo { display: inline-block; margin: 0 0 8px; font-family: var(--ch-font-display); font-weight: 600; font-size: 17px; letter-spacing: -0.2px; color: var(--ink, #1d1d1f); }
-#footer .logo span { color: var(--primary, #0066cc); }
+#footer .logo span { color: var(--link-text, #0066cc); }
 #footer .defs { margin: 0; max-width: none; }
 #footer .defs div { display: grid; grid-template-columns: 72px 1fr; gap: 12px; padding: 4px 0; border: 0; }
-#footer .defs dt { font-size: 12px; font-weight: 600; color: var(--ch-footer-ink); padding: 0; }
+#footer .defs dt { font-size: 13px; font-weight: 600; color: var(--ch-footer-ink); padding: 0; }
 #footer .defs dd { margin: 0; }
 #footer .footer__notice { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--ch-hairline); color: var(--ch-muted); }
 

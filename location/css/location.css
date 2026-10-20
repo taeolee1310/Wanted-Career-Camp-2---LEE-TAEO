@@ -25,8 +25,8 @@
   --fs-lead: 28px;
   --fs-tagline: 21px;
   --fs-body: 17px;
-  --fs-caption: 14px;
-  --fs-nav: 12px;
+  --fs-caption: 15px;
+  --fs-nav: 13px;
   --ls-hero: -0.28px;
   --ls-body: -0.374px;
   --ls-lead: 0.196px;
@@ -63,7 +63,7 @@ h1 { font-size: var(--fs-hero); line-height: 1.07; letter-spacing: var(--ls-hero
 h2 { font-size: var(--fs-section); line-height: 1.15; letter-spacing: var(--ls-body); }
 h3 { font-size: var(--fs-tagline); line-height: 1.19; }
 p { margin: 0 0 var(--space-sm); }
-a { color: var(--primary); }
+a { color: var(--link-text, var(--primary)); }
 
 :focus-visible { outline: 2px solid var(--primary-focus); outline-offset: 2px; }
 
@@ -103,7 +103,7 @@ a { color: var(--primary); }
 /* 버튼 */
 .actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
 .btn { display: inline-flex; align-items: center; justify-content: center; min-height: var(--touch); padding: var(--btn-pad-y) var(--btn-pad-x); border: 1px solid var(--primary); border-radius: var(--radius-pill); background: var(--primary); color: var(--on-dark); font: inherit; text-decoration: none; cursor: pointer; }
-.btn--ghost { background: transparent; color: var(--primary); }
+.btn--ghost { background: transparent; color: var(--link-text, var(--primary)); }
 .btn:active { transform: scale(0.95); }
 .note { margin: var(--space-sm) 0 0; font-size: var(--fs-caption); color: var(--ink-muted); min-height: 20px; }
 
