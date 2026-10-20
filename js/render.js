@@ -142,6 +142,13 @@
       '<ol class="track">' + segs + '</ol><ul class="marks">' + marks + '</ul></div>';
   }
 
+  /* 히어로 배경 영상: 소리 없이 자동 재생·반복. 글자 대비를 위해 CSS에서 어두운 막을 한 겹 덮는다 */
+  function heroBg() {
+    return '<div class="hero__bg" aria-hidden="true">' +
+      '<video class="hero__video" autoplay muted loop playsinline preload="auto" tabindex="-1">' +
+      '<source src="design/assets/hero/hero-bg.mp4" type="video/mp4"></video></div>';
+  }
+
   /* ---------- 메인화면 ---------- */
   function home() {
     var st = status();
@@ -149,7 +156,7 @@
       return '<li class="perk reveal"><strong>' + benefitValue(b) + '</strong><h3>' + b.name + '</h3><p>' + benefitDetail(b) + '</p></li>';
     }).join('');
 
-    var hero = '<section class="hero"><div class="container">' +
+    var hero = '<section class="hero">' + heroBg() + '<div class="container">' +
       '<p class="chip reveal">' + st.label + (st.note ? ' · ' + st.note : '') + '</p>' +
       '<p class="eyebrow reveal">' + campTitle + '</p>' +
       '<h1 class="reveal">' + C.camp.tagline + '</h1>' +

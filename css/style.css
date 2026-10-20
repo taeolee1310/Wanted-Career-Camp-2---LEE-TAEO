@@ -103,7 +103,21 @@ img { max-width: 100%; display: block; }
 .menu-btn span { display: block; width: 16px; height: 1px; background: currentColor; }
 
 /* Hero / page head */
-.hero { padding: var(--s-section) 0 64px; text-align: center; background: var(--bg); }
+.hero { position: relative; isolation: isolate; overflow: hidden; padding: var(--s-section) 0 64px; text-align: center; background: #000; color: #fff; }
+.hero > .container { position: relative; z-index: 1; }
+
+/* 히어로 배경 영상 */
+.hero__bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; background: #000; }
+.hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero__bg::after { content: ""; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.35); } /* 글자 대비 확보 */
+
+/* 히어로 안 글자·버튼은 어두운 배경 기준 */
+.hero .chip { background: rgba(255, 255, 255, 0.16); color: #fff; backdrop-filter: blur(12px); }
+.hero .chip::before { background: #fff; }
+.hero .lead, .hero .eyebrow, .hero h1 { color: #fff; }
+.hero .hero__meta { color: rgba(255, 255, 255, 0.78); }
+.hero .btn--ghost { color: #fff; border-color: rgba(255, 255, 255, 0.7); }
+.hero .btn--ghost:hover { color: #fff; border-color: #fff; background: rgba(255, 255, 255, 0.12); }
 .chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; margin-bottom: 20px; border-radius: var(--r-pill); background: var(--bg-alt); color: var(--ink-2); font-size: 14px; letter-spacing: -0.224px; }
 .chip::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--btn); }
 .eyebrow { font-family: var(--font-display); font-size: 21px; font-weight: 600; letter-spacing: 0.231px; line-height: 1.19; margin-bottom: 12px; }
@@ -116,7 +130,8 @@ h1 { font-family: var(--font-display); font-size: var(--fs-display); font-weight
 /* Journey — 16주 로드맵 비주얼 (제품 렌더 자리, 그림자는 여기와 약도에만) */
 .journey { max-width: 920px; margin: 56px auto 0; padding: 28px; text-align: left; background: var(--surface); border: 1px solid var(--hairline); border-radius: var(--r-lg); box-shadow: var(--product-shadow); }
 .journey__head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
-.journey__title { font-family: var(--font-display); font-size: 21px; font-weight: 600; letter-spacing: 0.231px; }
+.journey { color: var(--ink); } /* 히어로의 흰 글자색을 물려받지 않게 카드 기준으로 고정 */
+.journey__title { color: var(--ink); font-family: var(--font-display); font-size: 21px; font-weight: 600; letter-spacing: 0.231px; }
 .journey__range { font-size: 14px; letter-spacing: -0.224px; color: var(--muted); font-variant-numeric: tabular-nums; }
 .track { display: flex; gap: 4px; }
 .seg { display: flex; flex-direction: column; justify-content: space-between; gap: 18px; min-height: 112px; padding: 14px 14px 12px; border-radius: 12px; color: var(--ink); }

@@ -3,6 +3,13 @@
 
   /* 상단 메뉴·다크 모드 토글·모바일 메뉴는 js/chrome.js가 모든 페이지에서 공통으로 처리한다 */
 
+  /* 히어로 배경 영상: '동작 줄이기'가 켜져 있으면 멈춘다 */
+  var heroVideo = document.querySelector('.hero__video');
+  if (heroVideo && window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    heroVideo.removeAttribute('autoplay');
+    heroVideo.pause();
+  }
+
   /* 지원서 팝업 */
   var dlg = document.getElementById('applyDialog');
   var form = document.getElementById('applyForm');

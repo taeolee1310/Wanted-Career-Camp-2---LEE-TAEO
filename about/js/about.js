@@ -70,7 +70,7 @@
     const left = daysUntil(close.start);
     status.innerHTML = `모집 중 · <strong>${left === 0 ? 'D-DAY' : `D-${left}`}</strong> · ${fmt(close.start)} 마감`;
   } else {
-    status.textContent = `모집 마감 · ${fmt(close.start)}에 접수를 마감했습니다`;
+    status.textContent = `모집 마감 · ${fmt(close.start)}에 접수를 마감했어요`;
     applyBtn.setAttribute('aria-disabled', 'true');
     applyBtn.textContent = '모집 마감';
   }
@@ -160,7 +160,7 @@
   // 신청 버튼은 가상(#). 실제 접수는 일어나지 않는다.
   applyBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    $('#apply-note').textContent = `수업용 가상 페이지라 실제 접수는 진행되지 않습니다. 문의: ${C.contact.dept} ${C.contact.email}`;
+    $('#apply-note').textContent = `수업용 가상 페이지라 실제 접수는 진행되지 않아요. 문의: ${C.contact.dept} ${C.contact.email}`;
   });
 
   /* ---------- FAQ (하나만 열림) ---------- */
