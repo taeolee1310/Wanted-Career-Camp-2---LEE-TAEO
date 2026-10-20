@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="첫 결과물 화면을 만드는 그림">
+  <rect width="320" height="200" fill="#f5f5f7"/>
+  <rect x="64" y="32" width="192" height="136" rx="10" fill="#ffffff" stroke="#e0e0e0" stroke-width="2"/>
+  <path d="M64 42a10 10 0 0 1 10-10h172a10 10 0 0 1 10 10v12H64z" fill="#e0e0e0"/>
+  <circle cx="78" cy="43" r="3" fill="#7a7a7a"/><circle cx="88" cy="43" r="3" fill="#7a7a7a"/><circle cx="98" cy="43" r="3" fill="#7a7a7a"/>
+  <rect x="80" y="68" width="96" height="10" rx="5" fill="#1d1d1f"/>
+  <rect x="80" y="86" width="72" height="6" rx="3" fill="#e0e0e0"/>
+  <rect x="80" y="104" width="64" height="20" rx="10" fill="#0066cc"/>
+  <rect x="188" y="68" width="52" height="84" rx="6" fill="#f5f5f7"/>
+  <path d="M214 92l18 40-8-2-5 10-6-3 5-10-8-3z" fill="#1d1d1f"/>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="문서를 돋보기로 살펴보는 그림">
+  <rect width="320" height="200" fill="#f5f5f7"/>
+  <rect x="92" y="30" width="112" height="144" rx="8" fill="#ffffff" stroke="#e0e0e0" stroke-width="2"/>
+  <rect x="108" y="50" width="60" height="8" rx="4" fill="#1d1d1f"/>
+  <rect x="108" y="70" width="80" height="6" rx="3" fill="#e0e0e0"/>
+  <rect x="108" y="84" width="72" height="6" rx="3" fill="#e0e0e0"/>
+  <rect x="108" y="98" width="80" height="6" rx="3" fill="#e0e0e0"/>
+  <rect x="108" y="120" width="12" height="30" rx="2" fill="#e0e0e0"/>
+  <rect x="126" y="108" width="12" height="42" rx="2" fill="#0066cc"/>
+  <rect x="144" y="128" width="12" height="22" rx="2" fill="#e0e0e0"/>
+  <circle cx="196" cy="118" r="30" fill="none" stroke="#1d1d1f" stroke-width="8"/>
+  <path d="M218 140l24 24" stroke="#1d1d1f" stroke-width="10" stroke-linecap="round"/>
+</svg>

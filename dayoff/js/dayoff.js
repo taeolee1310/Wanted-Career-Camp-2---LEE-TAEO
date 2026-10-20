@@ -69,7 +69,9 @@
   el('roadmap-list').innerHTML = C.roadmap.map(function (p, i) {
     var off = dayoffs.filter(function (d) { return d.week >= p.from && d.week <= p.to; });
     var weeks = p.from === p.to ? p.from + '주차' : p.from + '–' + p.to + '주차';
+    // 사진 파일명은 로드맵 ID와 같다 (images/phase-01.svg …)
     return '<li class="card" id="' + p.id + '">' +
+      '<img class="card__img" src="images/' + p.id + '.svg" alt="' + esc(p.name) + ' 단계 그림" width="320" height="200" loading="lazy">' +
       '<p class="card__meta">' + (i + 1) + '단계 · ' + weeks + '</p>' +
       '<h3 class="card__title">' + esc(p.name) + '</h3>' +
       '<p class="card__period">' + fmt(weekMon(p.from)) + ' ~ ' + fmtShort(weekFri(p.to)) +
@@ -90,10 +92,27 @@
     if (!last || last.day !== r.day) days.push(last = { day: r.day, slots: [] });
     last.slots.push(r);
   });
+  // 활동 문구의 낱말로 픽토그램을 고른다 (위에서부터 먼저 맞는 것). 24px, 선 굵기 1.5
+  var ICONS = [
+    ['멘토링', '<circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M3 19a5 5 0 0 1 10 0M11 19a5 5 0 0 1 10 0"/>'],
+    ['특강', '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"/>'],
+    ['강의', '<rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20l4-4 4 4M7 9h6M7 12h10"/>'],
+    ['워크숍', '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M17.5 14v7M14 17.5h7"/>'],
+    ['회고', '<path d="M4 5h16v10H9l-5 4z"/><path d="M8 9h8M8 12h5"/>'],
+    ['코칭', '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M3 12h18"/>'],
+    ['프로젝트', '<rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20M10 9l-2 2 2 2M14 9l2 2-2 2"/>']
+  ];
+  function icon(text) {
+    var hit = ICONS.filter(function (i) { return text.indexOf(i[0]) !== -1; })[0];
+    if (!hit) return '';
+    return '<svg class="week__icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">' + hit[1] + '</svg>';
+  }
+
   el('week-list').innerHTML = days.map(function (d) {
     return '<li class="week__day"><p class="week__name">' + d.day + '</p>' +
       d.slots.map(function (s) {
-        return '<p class="week__slot"><span class="week__time">' + s.time + '</span>' + esc(s.text) + '</p>';
+        return '<p class="week__slot">' + icon(s.text) +
+          '<span><span class="week__time">' + s.time + '</span>' + esc(s.text) + '</span></p>';
       }).join('') + '</li>';
   }).join('');
 

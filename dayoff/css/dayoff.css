@@ -17,6 +17,7 @@
   --black: #000000;
   --on-dark: #ffffff;
 
+  --r-sm: 8px;
   --r-lg: 18px;
   --r-pill: 9999px;
 
@@ -286,6 +287,16 @@ button:focus-visible {
   padding: var(--s-lg);
 }
 
+.card__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: var(--r-sm);
+  margin-bottom: var(--s-md);
+}
+
 .card__meta {
   font-size: 14px;
   font-weight: 600;
@@ -353,6 +364,22 @@ button:focus-visible {
 
 .week__slot {
   margin-top: var(--s-sm);
+}
+
+.week__slot {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: var(--s-sm);
+  align-items: start;
+}
+
+.week__icon {
+  margin-top: 2px;
+  fill: none;
+  stroke: var(--primary-on-dark);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .week__time {
