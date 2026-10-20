@@ -32,12 +32,12 @@ location/
 
 ## 내용 규칙
 - 장소: 원티드랩 (실제 위치). 지도 iframe은 공식 퍼가기 코드
-- 날짜와 일정은 이 페이지에 쓰지 않고 `../schedule/index.html`을 링크한다
+- 날짜와 일정은 이 페이지에 쓰지 않고 `../dayoff/index.html`을 링크한다
 - 문의처는 푸터에만 둔다
 - 지하철, 버스, 주차 문구는 사실 확인 전 초안이다. 출구 번호와 버스 노선은 비워 둔다
 
 ## 메뉴 링크
-`../index.html`, `../about/index.html`, `../schedule/index.html`, `index.html`. 일정표는 `schedule/` 폴더로 추가 예정이며, 경로가 달라지면 맞춘다.
+`../index.html`, `../about/index.html`, `../dayoff/index.html`, `index.html`.
 
 ## 확인 방법
 - `location/`에서 `python -m http.server` 실행 후 `http://localhost:8000` 접속. `file://`로는 열지 않는다
