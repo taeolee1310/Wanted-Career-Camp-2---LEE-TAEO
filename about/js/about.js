@@ -41,17 +41,15 @@
   const campTitle = `${C.camp.name} ${C.camp.round}기`;
   const totalWeeks = C.roadmap[C.roadmap.length - 1].to;
   const months = totalWeeks / 4;
-  const open = date('date-open');
   const close = date('date-close');
   const start = date('date-start');
   const end = date('date-end');
-  const offline = ['date-start', 'date-demo', 'date-end'].map(date);
+  const offline = C.schedule.filter((d) => d.mode.startsWith('오프라인'));
 
   const bind = {
     'camp-title': campTitle,
-    positioning: C.camp.positioning,
+    tagline: C.camp.tagline,
     definition: C.camp.definition,
-    partner: C.camp.partner,
     'apply-label': C.camp.applyLabel,
     'total-weeks': `${totalWeeks}주`,
     period: `${fmt(start.start)} 개강 → ${fmt(end.start)} 수료 · 정원 ${C.camp.capacity}명`,
@@ -68,9 +66,7 @@
   const status = $('#recruit-status');
   const applyBtn = $('#apply-btn');
   const now = Date.now();
-  if (now < toKst(open.start).getTime()) {
-    status.innerHTML = `모집 예정 · <strong>${fmt(open.start)}</strong> 접수 시작`;
-  } else if (now < toKst(close.start).getTime()) {
+  if (now < toKst(close.start).getTime()) {
     const left = daysUntil(close.start);
     status.innerHTML = `모집 중 · <strong>${left === 0 ? 'D-DAY' : `D-${left}`}</strong> · ${fmt(close.start)} 마감`;
   } else {
@@ -80,16 +76,9 @@
   }
 
   /* ---------- 과정 한눈에 ---------- */
-  $('#overview-list').innerHTML = C.overview.map((o, i) => `
-    <article class="card">
-      <span class="card__num">${String(i + 1).padStart(2, '0')}</span>
-      <h3>${esc(o.name)}</h3>
-      <p>${esc(o.text)}</p>
-    </article>`).join('');
-
   $('#phase-list').innerHTML = C.roadmap.map((p) => `
     <li id="${p.id}">
-      <span class="caption">${p.from}–${p.to}주</span>
+      <span class="caption">${p.from === p.to ? p.from : `${p.from}–${p.to}`}주</span>
       <strong>${esc(p.name)}</strong>
     </li>`).join('');
 
@@ -129,7 +118,6 @@
           <dt>현직</dt><dd>${esc(p.now)}</dd>
           <dt>전직</dt><dd>${esc(p.prev)}</dd>
         </dl>
-        <p>${esc(p.bio)}</p>
       </div>
     </article>`;
   }).join('');
@@ -160,11 +148,11 @@
 
   /* ---------- 신청 방법 ---------- */
   $('#step-list').innerHTML = C.apply.map((s) => {
-    const d = date(s.ref);
+    const d = s.ref && date(s.ref);
     return `
     <li id="${s.id}">
       <h3>${esc(s.name)}</h3>
-      <time datetime="${d.start}">${s.prefix || ''}${fmtRange(d)}</time>
+      ${d ? `<time datetime="${d.start}">${s.prefix || ''}${fmtRange(d)}</time>` : ''}
       <p>${esc(s.text)}</p>
     </li>`;
   }).join('');
@@ -192,16 +180,11 @@
   /* ---------- 푸터 ---------- */
   const rows = (list) => list.map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('');
   $('#footer-company-list').innerHTML = rows([
-    ['회사명', `${C.company.name} (${C.company.nameEn})`],
-    ['대표', C.company.ceo],
-    ['소재지', C.company.address],
-    ['연락처', `${C.contact.email} / ${C.contact.phone}`]
+    ['회사명', C.company.name]
   ]);
   $('#footer-contact-list').innerHTML = rows([
     ['담당 부서', C.contact.dept],
-    ['이메일', C.contact.email],
-    ['전화', C.contact.phone],
-    ['응답 시간', C.contact.hours]
+    ['이메일', C.contact.email]
   ]);
 
   /* ---------- 모바일 메뉴 ---------- */

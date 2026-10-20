@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>일정표 · 휴강일</title>
-  <meta name="description" content="커리어 캠프 교육 기간의 단계별 로드맵, 주간 시간표, 오프라인 일정, 휴강일 안내">
+  <title>일정표</title>
+  <meta name="description" content="커리어 캠프 교육 기간의 단계별 로드맵과 오프라인 일정 안내">
   <link rel="stylesheet" href="css/dayoff.css">
   <script src="../content/data.js" defer></script>
   <script src="js/dayoff.js" defer></script>
@@ -28,12 +28,10 @@
 
   <div class="sub-nav">
     <div class="container">
-      <span class="sub-nav__title">휴강일 안내</span>
+      <span class="sub-nav__title">일정표</span>
       <nav class="sub-nav__links" aria-label="이 페이지 안 이동">
         <a href="#roadmap">로드맵</a>
-        <a href="#weekly">시간표</a>
         <a href="#offline" data-spy="#offline-col">오프라인</a>
-        <a href="#dayoff">휴강일</a>
       </nav>
     </div>
   </div>
@@ -44,8 +42,8 @@
     <section class="tile hero" aria-labelledby="hero-title">
       <div class="container">
         <p class="tile__eyebrow" data-text="campTitle"></p>
-        <h1 class="hero__title" id="hero-title">수업하는 날과<br>쉬는 날</h1>
-        <p class="hero__lead">교육 기간의 주간 일정과 휴강일을 한 페이지에 모았어요.</p>
+        <h1 class="hero__title" id="hero-title">교육 일정</h1>
+        <p class="hero__lead">교육 기간의 단계별 로드맵과 오프라인 일정을 한 페이지에 모았어요.</p>
         <dl class="hero__facts" id="hero-facts"></dl>
       </div>
     </section>
@@ -56,32 +54,18 @@
         <div class="tile__head">
           <p class="tile__eyebrow">단계별 로드맵</p>
           <h2 class="tile__title" id="roadmap-title"></h2>
-          <p class="tile__lead">단계마다 손에 남는 산출물이 있어요.</p>
         </div>
         <ol class="roadmap" id="roadmap-list"></ol>
         <p class="sum-check" id="roadmap-sum"></p>
       </div>
     </section>
 
-    <!-- 2. 주간 시간표 (company.md 6) -->
-    <section class="tile tile--dark" id="weekly" aria-labelledby="weekly-title">
-      <div class="container">
-        <div class="tile__head">
-          <p class="tile__eyebrow">주간 시간표</p>
-          <h2 class="tile__title" id="weekly-title"></h2>
-          <p class="tile__lead">점심시간 12:00–13:00은 모든 요일 같아요.</p>
-        </div>
-        <ul class="week" id="week-list"></ul>
-        <p class="tile__note">휴강일에는 수업이 없어요. 아래 휴강일을 확인해 주세요.</p>
-      </div>
-    </section>
-
-    <!-- 3. 오프라인 일정 · 휴강일 (company.md 5) -->
+    <!-- 2. 오프라인 일정 (company.md 5) -->
     <section class="tile" id="offline" aria-labelledby="offline-title">
       <div class="container">
         <div class="tile__head">
-          <p class="tile__eyebrow">오프라인 일정 · 휴강일</p>
-          <h2 class="tile__title" id="offline-title">만나는 날과 쉬는 날</h2>
+          <p class="tile__eyebrow">오프라인 일정</p>
+          <h2 class="tile__title" id="offline-title">만나는 날</h2>
           <p class="tile__lead">모든 날짜는 한국 시간(KST) 기준이에요.</p>
         </div>
         <div class="split">
@@ -89,11 +73,6 @@
             <h3 class="split__title">오프라인 일정</h3>
             <ul class="rows" id="offline-list"></ul>
             <p class="split__more"><a href="../location/index.html">장소와 오시는 길 보기 ›</a></p>
-          </div>
-          <div id="dayoff">
-            <h3 class="split__title">휴강일</h3>
-            <ul class="rows" id="dayoff-list"></ul>
-            <p class="split__more" data-text="dayoff.note"></p>
           </div>
         </div>
       </div>
@@ -108,15 +87,12 @@
       <div class="footer__cols">
         <div>
           <h2>회사 정보</h2>
-          <p><span data-text="company.name"></span> · 대표 <span data-text="company.ceo"></span></p>
-          <p data-text="company.address"></p>
-          <p>설립 <span data-text="company.founded"></span></p>
+          <p data-text="company.name"></p>
         </div>
         <div>
           <h2>문의처</h2>
           <p data-text="contact.dept"></p>
-          <p><span data-text="contact.email"></span> · <span data-text="contact.phone"></span></p>
-          <p>응답 시간 <span data-text="contact.hours"></span></p>
+          <p data-text="contact.email"></p>
         </div>
       </div>
     </div>

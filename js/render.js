@@ -28,9 +28,8 @@
   function S(id) { return C.schedule.filter(function (x) { return x.id === id; })[0]; }
 
   function status() {
-    var open = S('date-open'), close = S('date-close'), now = Date.now();
-    if (now < ms(open.start)) return { label: '모집 예정', note: '모집 시작 D-' + dday(open.start) };
-    if (now <= ms(close.start)) {
+    var close = S('date-close');
+    if (Date.now() <= ms(close.start)) {
       var d = dday(close.start);
       return { label: '모집 중', note: d === 0 ? '오늘 마감' : '마감 D-' + d };
     }
@@ -53,6 +52,7 @@
   var PAGES = [
     { key: 'home', href: 'index.html', label: '메인화면' },
     { key: 'about', href: 'about/index.html', label: '캠프소개' },
+    { key: 'dayoff', href: 'dayoff/index.html', label: '일정표' },
     { key: 'location', href: 'location/index.html', label: '오시는 길' }
   ];
 
@@ -101,7 +101,7 @@
       '</form>' +
       '<div class="modal__panel modal__done" id="applyDone" hidden>' +
       '<h2 class="modal__title">' + F.doneTitle + '</h2>' +
-      '<p>' + F.doneText.replace('{name}', '<b data-name></b>').replace('{date}', fmt(S('date-result').start)) + '</p>' +
+      '<p>' + F.doneText.replace('{name}', '<b data-name></b>') + '</p>' +
       '<p class="muted">' + F.doneNote + '</p>' +
       '<div class="modal__actions"><button type="button" class="btn" data-close>' + F.close + '</button></div>' +
       '</div>';
@@ -147,16 +147,10 @@
     var c = C.company, k = C.contact;
     document.getElementById('footer').innerHTML =
       '<div class="container footer__grid">' +
-      '<div><p class="logo">' + c.name + '<span>.</span></p><p class="muted">' + c.tagline + '</p></div>' +
-      '<dl class="defs defs--small">' +
-      '<div><dt>대표</dt><dd>' + c.ceo + '</dd></div>' +
-      '<div><dt>설립</dt><dd>' + c.founded + '</dd></div>' +
-      '<div><dt>소재지</dt><dd>' + c.address + '</dd></div>' +
-      '</dl>' +
+      '<div><p class="logo">' + c.name + '<span>.</span></p></div>' +
       '<dl class="defs defs--small">' +
       '<div><dt>문의</dt><dd>' + k.dept + '</dd></div>' +
-      '<div><dt>연락처</dt><dd>' + k.email + '<br>' + k.phone + '</dd></div>' +
-      '<div><dt>응답 시간</dt><dd>' + k.hours + '</dd></div>' +
+      '<div><dt>이메일</dt><dd>' + k.email + '</dd></div>' +
       '</dl></div>' +
       '<div class="container footer__notice">' + C.notice + '</div>';
   }
@@ -167,7 +161,7 @@
     var segs = C.roadmap.map(function (p, i) {
       var w = p.to - p.from + 1;
       return '<li class="seg" style="flex:' + w + '"><span class="seg__no">0' + (i + 1) + '</span>' +
-        '<div><b>' + p.name + '</b><small>' + p.from + '–' + p.to + '주</small></div></li>';
+        '<div><b>' + p.name + '</b><small>' + (p.from === p.to ? p.from : p.from + '–' + p.to) + '주</small></div></li>';
     }).join('');
 
     var days = totalWeeks * 7, startMs = kstDay(ms(st.start));
@@ -194,27 +188,17 @@
     var hero = '<section class="hero"><div class="container">' +
       '<p class="chip reveal">' + st.label + (st.note ? ' · ' + st.note : '') + '</p>' +
       '<p class="eyebrow reveal">' + campTitle + '</p>' +
-      '<h1 class="reveal">' + C.copy.headline[0] + '</h1>' +
-      '<p class="lead reveal">' + C.copy.sub + '</p>' +
+      '<h1 class="reveal">' + C.camp.tagline + '</h1>' +
+      '<p class="lead reveal">' + C.camp.definition + '</p>' +
       '<div class="hero__actions reveal">' + applyBtn('') + '</div>' +
       '<p class="hero__meta reveal">정원 ' + C.camp.capacity + '명 · ' + C.camp.jobs.join(' · ') + ' · 지원 마감 ' + fmt(S('date-close').start) + '</p>' +
       journey() +
       '</div></section>';
 
-    var personas = '<ul class="personas">' + C.personas.map(function (p) {
-      return '<li class="persona reveal" id="' + p.id + '"><p class="persona__text">“' + p.text + '”</p>' +
-        '<p class="persona__who">' + p.job + ' · ' + p.age + '세</p></li>';
-    }).join('') + '</ul>';
-
-    var message = '<p class="statement reveal">' + C.message.philosophy + '</p>' +
-      '<ul class="grid grid--4">' + C.message.skills.map(function (s, i) {
-        return '<li class="cell reveal"><span class="num">0' + (i + 1) + '</span><h3>' + s.name + '</h3><p class="muted">' + s.text + '</p></li>';
-      }).join('') + '</ul>';
-
-    var summary = timeline(['date-open', 'date-close', 'date-result', 'date-start']);
+    var summary = timeline(['date-close', 'date-start', 'date-end']);
 
     var L = C.location;
-    var loc = defs([['장소', L.name], ['주소', L.address], ['지하철', L.subway]]) +
+    var loc = defs([['장소', L.name], ['주소', L.address]]) +
       '<p class="more reveal"><a href="location/index.html">오시는 길 보기 →</a></p>';
 
     var perkBody = '<ul class="perks">' + perks + '</ul>' +
@@ -222,8 +206,6 @@
 
     return hero +
       section('perks', '캠프가 드리는 것', perkBody) +
-      section('empathy', '이런 고민, 있으셨나요', personas) +
-      section('message', '캠프가 보는 것', message, 'dark') +
       section('schedule-summary', '일정 요약', summary) +
       section('location-summary', '위치', loc, true) +
       cta();
